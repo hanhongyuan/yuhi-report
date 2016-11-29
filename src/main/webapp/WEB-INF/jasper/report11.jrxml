@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report11" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="15e99df8-c1aa-497f-983e-5af28c8d6b1d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="12"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="493">
+			<rectangle>
+				<reportElement x="50" y="142" width="100" height="20" uuid="bade5c5d-9437-4932-bb2a-b3b69908f727"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="162" width="100" height="60" uuid="7b652e5a-4998-45c0-b039-71945f39fffd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="162" width="400" height="60" uuid="ff4b5755-3110-4eb4-a3b0-85c6bda5124b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="162" width="100" height="60" uuid="b3c67141-22ff-4ed3-abe5-b544234d2b5c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="142" width="400" height="20" uuid="26fa5c8a-16ee-479a-8093-3876479e8902"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="142" width="100" height="20" uuid="adb68273-d259-4448-9a83-98ea22be0ef6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="162" width="100" height="60" uuid="1b1d2a03-6069-46ba-850f-c79359c29d8a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="142" width="100" height="20" uuid="887f5a26-2401-467b-b790-90f9d62f4a01"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="222" width="100" height="40" uuid="a96440c9-734b-4410-a66d-aeb744db6351"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="222" width="400" height="40" uuid="d49c1cde-49c5-4286-946d-e04fa124f711"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="222" width="100" height="40" uuid="c308b023-9ac9-4c1a-9c1a-d8789c89e914"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="222" width="100" height="40" uuid="8229078a-f821-47f7-9216-3852ba042f89"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="322" width="100" height="20" uuid="4642b01f-3075-4081-833a-6c27845fd898"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="262" width="100" height="60" uuid="3ab53234-1eef-4ad1-8549-c9d722d39484"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="262" width="400" height="60" uuid="8715a487-716d-4370-8b65-b19fb8faf2c2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="262" width="100" height="60" uuid="678cedf0-e7a8-4ed7-a950-256d2bb17347"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="262" width="100" height="60" uuid="55ed2732-c84b-4623-95fb-8c5ab030e1ff"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="322" width="400" height="20" uuid="25273c41-5857-4b04-9990-5d6544488e4e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="322" width="100" height="20" uuid="89925dd7-ed58-498c-ab84-f151621fa283"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="322" width="100" height="20" uuid="fe66c526-7a57-4554-8cea-cac084cc13ea"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="342" width="100" height="20" uuid="1fd598fd-8e23-4ee9-843f-bf80c7b27941"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="342" width="400" height="20" uuid="cf16e62f-c7d2-4c4c-8ebb-5dc228bd44a5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="342" width="100" height="20" uuid="df0640ed-5660-4a5f-af88-dce0fd3adbfd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="342" width="100" height="20" uuid="e6fa558d-105f-4572-91f1-cd4b1866367b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="362" width="100" height="40" uuid="34a705bf-e32b-4852-967f-40d68208dca4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="362" width="400" height="40" uuid="442c9e9e-20d9-49ee-90ac-b283ff216f40"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="362" width="100" height="40" uuid="74ba55ce-c488-4744-8fac-23962293c55e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="362" width="100" height="40" uuid="7a7d46b8-8e1f-43f3-ab65-35285f8c95a1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="402" width="100" height="40" uuid="b29a99e0-e22b-4cfe-951d-7183e5a72395"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="402" width="400" height="40" uuid="73346ad3-b338-41f4-84ee-3ce8f42edf7d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="402" width="100" height="40" uuid="a9089a33-57de-4d7b-9442-80809584a290"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="402" width="100" height="40" uuid="8bb2817c-0361-47b6-9ddb-e288e305751f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="150" y="142" width="400" height="20" uuid="6e6d52ad-1265-49b0-bb49-30d27a6a5e6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[具体内容]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="0" width="107" height="30" uuid="611d721f-05e9-4259-abf6-2e842e3aeaab"/>
+				<textElement>
+					<font fontName="微软雅黑" size="8" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[编号YHWY/QEO-SS-1,4_F3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="514" y="0" width="36" height="30" uuid="99bf37b9-a6bc-417c-873b-00edba860773"/>
+				<textElement>
+					<font fontName="微软雅黑" size="8" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[版本A/0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="0" width="63" height="30" uuid="b68b7757-caa7-441c-9a2c-534466a1533e"/>
+				<textElement>
+					<font fontName="微软雅黑" size="8" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[修改状态：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="613" y="0" width="96" height="30" uuid="f05fe0c6-a33c-4384-adb6-583f39906255"/>
+				<textElement>
+					<font fontName="微软雅黑" size="8" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[生效期：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="709" y="0" width="41" height="30" uuid="0b1502da-1a98-482c-8fa6-870b9efbb197"/>
+				<textElement>
+					<font fontName="微软雅黑" size="8" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[页数：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="122" width="100" height="20" uuid="6ade435f-cf1e-46d4-8cde-73e6828e26b0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[报修部门:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="122" width="100" height="20" uuid="eb27d5f5-3072-4f63-a6d4-ff9cd81788ee"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[报修人:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="122" width="100" height="20" uuid="f315d168-f8b9-415a-b4ca-e21cc88989ff"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[填单人:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="122" width="249" height="20" uuid="89467830-83b2-43ea-9656-22f63e611821"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[接修人:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="599" y="122" width="151" height="20" uuid="269604f1-c821-4c34-b346-782bcd98640d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="30" width="328" height="92" uuid="390de7a5-07a5-4b08-9685-68288d1fd746"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="36" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[公共设施报修派工单]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="142" width="100" height="20" uuid="56b97cb1-359e-42f4-8b62-947ead57409f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[设施类型]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="142" width="100" height="20" uuid="7d9c5dff-e3e0-4e5a-a790-4cadfd520480"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[报修地点]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="142" width="100" height="20" uuid="9652980a-1f5d-461a-8be0-c6adfa366269"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[备注]]></text>
+			</staticText>
+			<image>
+				<reportElement x="50" y="30" width="110" height="50" uuid="6a44d4ec-4663-4feb-b2a7-e19c2fb8a310"/>
+				<imageExpression><![CDATA["C:\\Users\\Administrator\\Desktop\\sysytemlogoss.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="50" y="442" width="439" height="20" uuid="effd9a6a-85b3-4379-8c5c-f0145f6d911e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[请对应维修项打"V",如无此项目或管理用房内的设施类维修,请填写在"其他类"栏.]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+</jasperReport>
