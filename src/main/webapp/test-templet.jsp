@@ -28,14 +28,23 @@
 		}
 		
 		function show(){
-			var url="${basePath}saveTemplet.do?id="+$("[name=id]").val()+"&type="+$("[name=type]").val();
-			openwindow(url);
+			if($('#test_templet_form').form('validate')){
+				$.post('${basePath}saveTemplet.do',{id:$("[name=id]").val(),type:$("[name=type]").val()},function(data){
+					openwindow(data);
+				});
+			}else{
+				alert('请完善表单数据');
+			}
 		}
 		
 		function download(){
-			//var url="${basePath}loadTemplet.do?id="+$("[name=id]").val()+"&type="+$("[name=type]").val()+"&code="+$("[name=code]").val();
-			//openwindow(url);
-			//$.post('${basePath}loadTemplet.do',{id:$("[name=id]").val(),type:$("[name=type]").val()});
+			if($('#test_templet_form').form('validate')){
+				$.get('${basePath}loadTemplet.do',{id:$("[name=id]").val(),type:$("[name=type]").val()});
+				//var url="${basePath}loadTemplet.do?id="+$("[name=id]").val()+"&type="+$("[name=type]").val()+"&code="+$("[name=code]").val();
+				//openwindow(url);
+			}else{
+				alert('请完善表单数据');
+			}
 		}
 	</script>
   </body>

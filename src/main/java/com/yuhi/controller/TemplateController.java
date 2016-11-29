@@ -16,7 +16,6 @@ import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -84,31 +83,6 @@ public class TemplateController {
 		model.addAttribute("format", type);
 		return "iReportView";
 	}
-	
-//	@RequestMapping(value = "/checkTemplet")
-//    public String checkTemplet(ModelMap model,String id,
-//    		String params,String type) throws JRException {
-//		
-//		//外部参数遍历转型
-//		Properties par= JSON.parseObject(params, Properties.class);
-//		Properties parameters = par==null?new Properties():par;
-//		
-//		parameters.put("people", "kyle");
-//		
-//		StudentDataSource dsStudent =  new StudentDataSource();
-//		jrDatasource = dsStudent.create(null);
-//		
-//		JSONObject t = templateService.getEntityById(id);
-//		//模板地址
-//		model.addAttribute("url", t.getString("jasperurl"));
-//		//设置外部参数
-//		model.addAttribute("model", parameters);
-//		//设置数据源
-//		model.addAttribute("jrMainDataSource", jrDatasource);
-//		//设置输出类型
-//		model.addAttribute("format", type);
-//		return "iReportView";
-//	}
 	
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/loadTemplet")
