@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.yuhi.common.AjaxJson;
+import com.yuhi.common.PropertiesUtil;
 import com.yuhi.datasource.StudentDataSource;
 import com.yuhi.entity.Template;
 import com.yuhi.service.DataService;
@@ -56,7 +57,32 @@ public class TemplateController {
 		
 		Integer data_id = dataService.insertEntity(data);
 		
-		return ""+data_id;
+		PropertiesUtil url = new PropertiesUtil("application.properties");
+		
+		return url.readProperty("host.url")+"checkTemplet.do?id="+data_id;
+	}
+	
+	@RequestMapping(value = "/checkTemplet")
+	public String checkTemplet(ModelMap model,String id) throws JRException {
+		
+		JSONObject data = dataService.getEntityById(id);
+		
+		Properties parameters = JSON.parseObject(data.getString("params"), Properties.class);
+		String type = data.getString("type");
+		JSONObject template = templateService.getEntityById(data.getString("template"));
+		
+		StudentDataSource dsStudent =  new StudentDataSource();
+		jrDatasource = dsStudent.create(null);
+		
+		//模板地址
+		model.addAttribute("url", template.getString("jasperurl"));
+		//设置外部参数
+		model.addAttribute("model", parameters);
+		//设置数据源
+		model.addAttribute("jrMainDataSource", jrDatasource);
+		//设置输出类型
+		model.addAttribute("format", type);
+		return "iReportView";
 	}
 	
 //	@RequestMapping(value = "/checkTemplet")
@@ -86,9 +112,8 @@ public class TemplateController {
 	
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/loadTemplet")
-	public void loadTemplet(String type, String id,
-            HttpServletRequest request, HttpServletResponse response,
-            @RequestParam(required = true)String params) throws JRException {
+	public void loadTemplet(String type, String id, String params,
+            HttpServletRequest request, HttpServletResponse response) throws JRException {
 		
 		//外部参数遍历转型
 		HashedMap par= JSON.parseObject(params, HashedMap.class);

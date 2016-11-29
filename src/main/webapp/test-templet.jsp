@@ -28,14 +28,14 @@
 		}
 		
 		function show(){
-			var url="${basePath}checkTemplet.do?id="+$("[name=id]").val()+"&type="+$("[name=type]").val()+"&code="+$("[name=code]").val();
+			var url="${basePath}saveTemplet.do?id="+$("[name=id]").val()+"&type="+$("[name=type]").val();
 			openwindow(url);
 		}
 		
 		function download(){
-			var url="${basePath}loadTemplet.do?id="+$("[name=id]").val()+"&type="+$("[name=type]").val()+"&code="+$("[name=code]").val();
-			openwindow(url);
-			//$.post('${basePath}loadTemplet.do',{id:$("[name=id]").val(),type:$("[name=type]").val(),code:$("[name=code]").val()});
+			//var url="${basePath}loadTemplet.do?id="+$("[name=id]").val()+"&type="+$("[name=type]").val()+"&code="+$("[name=code]").val();
+			//openwindow(url);
+			//$.post('${basePath}loadTemplet.do',{id:$("[name=id]").val(),type:$("[name=type]").val()});
 		}
 	</script>
   </body>

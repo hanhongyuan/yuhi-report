@@ -39,6 +39,7 @@
     </table>
     <script type="text/javascript" src="${basePath}js/fileupload/ajaxfileupload.js"></script>
     <script type="text/javascript" src="${basePath}js/fileupload/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="${basePath}js/tools.js"></script>
     <script type="text/javascript">
     	var jasperurl_old = '${Templet.jasperurl}';
     	var jrxmlurl_old = '${Templet.jrxmlurl}';
@@ -46,32 +47,23 @@
     	var TempletVersion = '${Templet.version}'==""?0:'${Templet.version}';
     	var version_flag = 0;
     	
-    	$.fn.serializeObject = function(){    
-		   var o = {};    
-		   var a = this.serializeArray();    
-		   $.each(a, function() {    
-		       if (o[this.name]) {    
-		           if (!o[this.name].push) {    
-		               o[this.name] = [o[this.name]];    
-		           }    
-		           o[this.name].push(this.value || '');    
-		       } else {    
-		           o[this.name] = this.value || '';    
-		       }    
-		   });    
-		   return o;
-		}; 
-    	
     	function sendform(){
 			if($('#templet_form').form('validate')){
 				if(version_flag)$("[name=version]").val(Number(TempletVersion)+1);
-				//$('#templet_form').submit(); 
-				debugger
 				var jsonData = JSON.stringify($("#templet_form").serializeObject());
 				$.ajax({
 					type:"post",
 					url:"${basePath}editTemplet.do",
 					data:{data:jsonData},
+					success:function(data){
+						if(data>=0){
+							msg("成功");
+					    	closeDialog($("#templet_edit"));
+					    	$("#templet_table").datagrid("reload");
+						} else {
+							msg("异常");
+						}
+					}
 				});
 			}else{
 				alert('请完善表单数据');
@@ -126,7 +118,7 @@
 			});
 		}
 		
-		$('#templet_form').form({    
+		/* $('#templet_form').form({    
 			validate:true,
 		    url:"${basePath}editTemplet.do",    
 		    onSubmit: function(param){},    
@@ -139,7 +131,7 @@
 			    	msg("异常");
 			    }
 		    }    
-		});
+		}); */
 	</script>
   </body>
 </html>
