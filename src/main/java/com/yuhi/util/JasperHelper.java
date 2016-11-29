@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.sql.Connection;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -35,6 +36,8 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.j2ee.servlets.ImageServlet;
 
 import org.apache.log4j.Logger;
+
+import com.alibaba.fastjson.JSON;
 
 public class JasperHelper {
     private static Logger logger = Logger.getLogger(JasperHelper.class);
@@ -309,7 +312,8 @@ public class JasperHelper {
         out.flush();
 
     }
-    public static void showHtml(String defaultFilename, String reportfile,
+    @SuppressWarnings("deprecation")
+	public static void showHtml(String defaultFilename, String reportfile,
             HttpServletRequest request, HttpServletResponse response, Map parameters,
             Connection conn) throws JRException, IOException {
 
@@ -337,7 +341,46 @@ public class JasperHelper {
         out.flush();
 
     }
-   
+    /**
+     * 输出html静态页面，必须注入request和response
+     * 
+     * @param jasperPath
+     * @param params
+     * @param sourceList
+     * @param imageUrl
+     *            报表文件使用的图片路径，比如 ../servlets/image?image=
+     * @throws JRException
+     * @throws IOException
+     * @throws ServletException
+     */
+    public static void showPdf(String defaultFilename, String reportfile,
+            HttpServletRequest request, HttpServletResponse response, Map parameters,
+            JRDataSource conn) throws JRException, IOException {
+
+
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
+
+        JRAbstractExporter exporter = getJRExporter(DocType.PDF);
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reportfile,
+                parameters, conn);
+        request.getSession().setAttribute(
+                ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,
+                jasperPrint);
+
+        PrintWriter out = response.getWriter();
+
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_WRITER, out);
+        exporter.setParameter(
+        JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,
+        Boolean.FALSE);
+        exporter.exportReport();
+        out.flush();
+
+    }
     public static void showPdf(String defaultFilename, String reportfile,
             HttpServletRequest request, HttpServletResponse response, Map parameters,
             Connection conn) throws JRException, IOException {
@@ -364,6 +407,16 @@ public class JasperHelper {
         out.flush();
 
     }
+    
+    
+    public static void main(String[] args) {
+    	Properties parameters = new Properties();
+    	parameters.setProperty("a", "a");
+    	
+    	String str=JSON.toJSONString(parameters);
+    	
+    	parameters =JSON.parseObject(str, Properties.class);
+	}
 
 
 }

@@ -55,6 +55,8 @@ public class StudentDataSource extends JRAbstractBeanDataSourceProvider {
 		listStudent.add(new Student("S009", "Sonu Nigam", "PGDCA", "A"));
 		listStudent.add(new Student("S0010", "Sunidhi Chauhan", "BBA", "B"));
 		listStudent.add(new Student("S0011", "Lata Manjeshkar", "MCA", "A"));
+		
+		JRBeanCollectionDataSource jc=new JRBeanCollectionDataSource(listStudent);
 		return new JRBeanCollectionDataSource(listStudent);
 	}
 
