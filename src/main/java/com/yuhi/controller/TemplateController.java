@@ -26,6 +26,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.yuhi.common.AjaxJson;
 import com.yuhi.datasource.StudentDataSource;
 import com.yuhi.entity.Template;
+import com.yuhi.service.DataService;
 import com.yuhi.service.TemplateService;
 import com.yuhi.util.JasperHelper;
 
@@ -37,30 +38,51 @@ public class TemplateController {
 	@Resource
 	private TemplateService templateService;
 	
-	@RequestMapping(value = "/checkTemplet")
-    public String checkTemplet(ModelMap model,String id,
+	@Resource
+	private DataService dataService;
+	
+	@RequestMapping(value = "/saveTemplet")
+	@ResponseBody
+    public String saveTemplet(ModelMap model,String id,
     		String params,String type) throws JRException {
 		
-		//外部参数遍历转型
-		Properties par= JSON.parseObject(params, Properties.class);
-		Properties parameters = par==null?new Properties():par;
+		JSONObject param = new JSONObject();
+		param.put("people", "kyle");
 		
-		parameters.put("people", "kyle");
+		JSONObject data = new JSONObject();
+		data.put("template", id);
+		data.put("params", param.toJSONString());
+		data.put("type", type);
 		
-		StudentDataSource dsStudent =  new StudentDataSource();
-		jrDatasource = dsStudent.create(null);
+		Integer data_id = dataService.insertEntity(data);
 		
-		JSONObject t = templateService.getEntityById(id);
-		//模板地址
-		model.addAttribute("url", t.getString("jasperurl"));
-		//设置外部参数
-		model.addAttribute("model", parameters);
-		//设置数据源
-		model.addAttribute("jrMainDataSource", jrDatasource);
-		//设置输出类型
-		model.addAttribute("format", type);
-		return "iReportView";
+		return ""+data_id;
 	}
+	
+//	@RequestMapping(value = "/checkTemplet")
+//    public String checkTemplet(ModelMap model,String id,
+//    		String params,String type) throws JRException {
+//		
+//		//外部参数遍历转型
+//		Properties par= JSON.parseObject(params, Properties.class);
+//		Properties parameters = par==null?new Properties():par;
+//		
+//		parameters.put("people", "kyle");
+//		
+//		StudentDataSource dsStudent =  new StudentDataSource();
+//		jrDatasource = dsStudent.create(null);
+//		
+//		JSONObject t = templateService.getEntityById(id);
+//		//模板地址
+//		model.addAttribute("url", t.getString("jasperurl"));
+//		//设置外部参数
+//		model.addAttribute("model", parameters);
+//		//设置数据源
+//		model.addAttribute("jrMainDataSource", jrDatasource);
+//		//设置输出类型
+//		model.addAttribute("format", type);
+//		return "iReportView";
+//	}
 	
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/loadTemplet")
