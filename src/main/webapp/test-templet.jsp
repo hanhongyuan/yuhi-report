@@ -6,7 +6,7 @@
   <head>
   </head>
   <body>
-  	<form id="test_templet_form" method="post">
+  	<form id="test_templet_form" action="${basePath}loadTemplet.do" method="post">
     	<table cellpadding="5">
     		<tr>
     			<td>报表名称:</td>
@@ -23,14 +23,14 @@
     <script type="text/javascript" src="${basePath}js/fileupload/ajaxfileupload.js"></script>
     <script type="text/javascript" src="${basePath}js/fileupload/jquery.fileupload.js"></script>
     <script type="text/javascript">
-		function openwindow(aa){
-		    return window.open(aa,'newindow','height=600,width=900,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
-		}
+		//function openwindow(aa){
+		//   return window.open(aa,'newindow','height=600,width=900,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
+		//}
 		
 		function show(){
 			if($('#test_templet_form').form('validate')){
 				$.post('${basePath}saveTemplet.do',{id:$("[name=id]").val(),type:$("[name=type]").val()},function(data){
-					openwindow(data);
+					window.open(data);
 				});
 			}else{
 				alert('请完善表单数据');
@@ -39,9 +39,7 @@
 		
 		function download(){
 			if($('#test_templet_form').form('validate')){
-				$.get('${basePath}loadTemplet.do',{id:$("[name=id]").val(),type:$("[name=type]").val()});
-				//var url="${basePath}loadTemplet.do?id="+$("[name=id]").val()+"&type="+$("[name=type]").val()+"&code="+$("[name=code]").val();
-				//openwindow(url);
+				$('#test_templet_form').submit();
 			}else{
 				alert('请完善表单数据');
 			}

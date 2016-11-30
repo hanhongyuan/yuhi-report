@@ -117,21 +117,6 @@
                	}
 			});
 		}
-		
-		/* $('#templet_form').form({    
-			validate:true,
-		    url:"${basePath}editTemplet.do",    
-		    onSubmit: function(param){},    
-		    success:function(data){    
-			    if(data.indexOf('true')){
-			    	msg("成功");
-			    	closeDialog($("#templet_edit"));
-			    	$("#templet_table").datagrid("reload");
-			    }else{
-			    	msg("异常");
-			    }
-		    }    
-		}); */
 	</script>
   </body>
 </html>
