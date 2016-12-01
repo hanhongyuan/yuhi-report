@@ -12,7 +12,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.yuhi.common.AjaxJson;
 import com.yuhi.service.DataSourceService;
 
-@Controller("dataSource")
+@Controller
+@RequestMapping("/datasource")
 public class DataSourceController {
 
 	@Resource

@@ -10,7 +10,7 @@ import com.yuhi.common.AjaxJson;
 import com.yuhi.dao.TemplateDao;
 import com.yuhi.service.TemplateService;
 
-@Service("TemplateService")
+@Service
 public class TemplateServiceImpl implements TemplateService {
 	
 	@Autowired

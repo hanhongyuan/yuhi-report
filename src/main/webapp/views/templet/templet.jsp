@@ -15,7 +15,7 @@ session.setAttribute("basePath", basePath);
   </head>
   <body>
   	<div class="easyui-layout" style="width:1320px;height:620px;">
-		<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+		<div data-options="region:'center',title:'Templet-Management',iconCls:'icon-ok'">
 			<div id="templet_tb">
 				<a class="easyui-linkbutton" iconCls="icon-add" onclick="templet_save()">添加</a>
 				<a class="easyui-linkbutton" iconCls="icon-edit" onclick="templet_edit()">編輯</a>
@@ -31,7 +31,7 @@ session.setAttribute("basePath", basePath);
     <script type="text/javascript">
     	$('#templet_table').datagrid({    
     		loadFilter:pagerFilter,
-		    url:'<%=basePath%>getData.do',
+		    url:'<%=basePath%>templet/getData.do',
 		    columns:[[
 		    	{field:'name',title:'报表名称',width:100},
 		   		{field:'jasperurl',title:'jasperurl地址',width:500},

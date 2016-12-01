@@ -8,7 +8,7 @@ import com.yuhi.common.AjaxJson;
 import com.yuhi.dao.DataDao;
 import com.yuhi.service.DataService;
 
-@Service("DataService")
+@Service
 public class DataServiceImpl implements DataService{
 
 	@Autowired

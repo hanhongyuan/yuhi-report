@@ -14,7 +14,8 @@ public class DataSourceDao extends BaseJdbcDao{
 	private static final String SQL_TABLE_NAME = "DATA_SOURCE";
 	
 	public Integer save(JSONObject jsonObject) {
-		return super.insertOrReturnId(SQL_TABLE_NAME, jsonObject);
+		int aa = super.insertOrReturnId(SQL_TABLE_NAME, jsonObject);
+		return aa;
 	}
 	
 	public Integer update(JSONObject jsonObject) {

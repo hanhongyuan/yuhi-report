@@ -29,7 +29,8 @@ import com.yuhi.service.DataService;
 import com.yuhi.service.TemplateService;
 import com.yuhi.util.JasperHelper;
 
-@Controller("templet")
+@Controller
+@RequestMapping("/templet")
 public class TemplateController {
 	
 	private JRDataSource jrDatasource;

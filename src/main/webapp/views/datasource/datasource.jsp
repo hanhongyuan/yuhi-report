@@ -15,28 +15,27 @@ session.setAttribute("basePath", basePath);
   </head>
   <body>
   	<div class="easyui-layout" style="width:1320px;height:620px;">
-		<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-			<div id="templet_tb">
-				<a class="easyui-linkbutton" iconCls="icon-add" onclick="templet_save()">添加</a>
-				<a class="easyui-linkbutton" iconCls="icon-edit" onclick="templet_edit()">編輯</a>
-				<a class="easyui-linkbutton" onclick="templet_test()">测试调用</a>
+		<div data-options="region:'center',title:'DataSource-Management',iconCls:'icon-ok'">
+			<div id="datasource_tb">
+				<a class="easyui-linkbutton" iconCls="icon-add" onclick="datasource_save()">添加</a>
+				<a class="easyui-linkbutton" iconCls="icon-edit" onclick="datasource_edit()">編輯</a>
 			</div>
-		    <table id="templet_table"></table>
-		    <div id="templet_edit"></div>
+		    <table id="datasource_table"></table>
+		    <div id="datasource_edit"></div>
 		</div>
 	</div>
     <script type="text/javascript" src="<%=basePath%>js/curstomjs.js"></script>
     <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript">
-    	$('#templet_table').datagrid({    
+    	$('#datasource_table').datagrid({    
     		loadFilter:pagerFilter,
-		    url:'<%=basePath%>getData.do',
+		    url:'<%=basePath%>datasource/getData.do',
 		    columns:[[
-		    	{field:'name',title:'报表名称',width:100},
-		   		{field:'jasperurl',title:'jasperurl地址',width:500},
-		   		{field:'jrxmlurl',title:'jrxmlurl地址',width:500},
-		   		{field:'version',title:'版本号',width:100},
+		    	{field:'name',title:'数据源名称',width:100},
+		   		{field:'table_name',title:'数据库表',width:500},
+		   		{field:'param',title:'参数',width:500},
+		   		{field:'sort',title:'排序',width:100},
 				{field:'status',title:'状态',width:50,
 		   			formatter: function(value){
 		        		if(value=='1'){
@@ -50,34 +49,24 @@ session.setAttribute("basePath", basePath);
 		    method: 'get',
 		    pageSize:10,
 		    pagination:true,
-		    toolbar: '#templet_tb'
+		    toolbar: '#datasource_tb'
 		}); 
 		
-		function templet_save(){
-			OpenDialog($('#templet_edit'),'新增','<%=basePath%>goEditTemplet.do',
+		function datasource_save(){
+			OpenDialog($('#datasource_edit'),'新增','<%=basePath%>datasource/goEditDataSource.do',
 						function(){
 							sendform();
-						},function(){
-							cancelform();
 						},800,450);
 		}
 		
-		function templet_edit(){
-			var row=IsSelectRow($('#templet_table'));
+		function datasource_edit(){
+			var row=IsSelectRow($('#datasource_table'));
 			if(row){
-				OpenDialog($('#templet_edit'),'编辑','<%=basePath%>goEditTemplet.do?id='+row.id,
+				OpenDialog($('#datasource_edit'),'编辑','<%=basePath%>datasource/goEditDataSource.do?id='+row.id,
 					function(){
 						sendform();
-					},
-					function(){
-						cancelform();
 					},800,450);
 			}
-		}
-		
-		function templet_test(){
-			OpenDialog($('#templet_edit'),'测试','<%=basePath%>goTestTemplet.do',
-					null,null,800,450);
 		}
 	</script>
   </body>

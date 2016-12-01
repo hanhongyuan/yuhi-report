@@ -10,7 +10,7 @@
     	<table cellpadding="5">
     		<tr>
     			<td>报表名称:</td>
-    			<td><yh:select name="id" url="${basePath}getData.do"></yh:select></td>
+    			<td><yh:select name="id" url="${basePath}templet/getData.do"></yh:select></td>
     		</tr>
     		<tr>
     			<td>类型:</td>
