@@ -25,12 +25,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.yuhi.common.AjaxJson;
 import com.yuhi.common.PropertiesUtil;
 import com.yuhi.datasource.StudentDataSource;
-import com.yuhi.entity.Template;
 import com.yuhi.service.DataService;
 import com.yuhi.service.TemplateService;
 import com.yuhi.util.JasperHelper;
 
-@Controller
+@Controller("templet")
 public class TemplateController {
 	
 	private JRDataSource jrDatasource;
@@ -106,7 +105,7 @@ public class TemplateController {
 	
 	@RequestMapping(value = "/goTemplet")
 	public String goTemplet(){
-		return "templet";
+		return "views/templet/templet";
 	}
 	
 	@RequestMapping(value = "/getData")
@@ -121,12 +120,12 @@ public class TemplateController {
 		if(id!=null){
 			map.put("Templet", templateService.getEntityById(id));
 		}
-		return "edit-templet";
+		return "views/templet/edit-templet";
 	}
 	
 	@RequestMapping(value = "/goTestTemplet")
 	public String goTestTemplet(){
-		return "test-templet";
+		return "views/templet/test-templet";
 	}
 	
 	@RequestMapping(value = "/editTemplet")
@@ -143,7 +142,7 @@ public class TemplateController {
 	
 	@RequestMapping(value = "/uploadfile")
 	@ResponseBody
-	public String uploadfile(HttpServletRequest req,String type,Template template) throws IllegalStateException, IOException{
+	public String uploadfile(HttpServletRequest req,String type,String id,Integer version) throws IllegalStateException, IOException{
 		@SuppressWarnings("deprecation")
 		String rootPath = req.getRealPath("/");
 		JSONObject obj=new JSONObject();
@@ -156,7 +155,7 @@ public class TemplateController {
 				return obj.toString();
 			}
 			String newFileName = UUID.randomUUID().toString()+suffix;
-			String url = "/report/"+template.getId()+"/version"+(template.getVersion()+1)+"/"+newFileName;
+			String url = "/report/"+id+"/version"+(version+1)+"/"+newFileName;
 			File uploadPic = new java.io.File(rootPath+url);   
 			if(!uploadPic.exists()){				//判断文件路径是否存在
 				uploadPic.mkdirs();					//不存在即创建
