@@ -56,7 +56,7 @@ session.setAttribute("basePath", basePath);
 			OpenDialog($('#datasource_edit'),'新增','<%=basePath%>datasource/goEditDataSource.do',
 						function(){
 							sendform();
-						},800,450);
+						},null,800,450);
 		}
 		
 		function datasource_edit(){
@@ -65,7 +65,7 @@ session.setAttribute("basePath", basePath);
 				OpenDialog($('#datasource_edit'),'编辑','<%=basePath%>datasource/goEditDataSource.do?id='+row.id,
 					function(){
 						sendform();
-					},800,450);
+					},null,800,450);
 			}
 		}
 	</script>

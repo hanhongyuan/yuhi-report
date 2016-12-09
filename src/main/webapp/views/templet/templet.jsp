@@ -33,9 +33,10 @@ session.setAttribute("basePath", basePath);
     		loadFilter:pagerFilter,
 		    url:'<%=basePath%>templet/getData.do',
 		    columns:[[
-		    	{field:'name',title:'报表名称',width:100},
-		   		{field:'jasperurl',title:'jasperurl地址',width:500},
-		   		{field:'jrxmlurl',title:'jrxmlurl地址',width:500},
+		    	{field:'name',title:'报表名称',width:200},
+		    	{field:'mode',title:'报表模式',width:200},
+		   		{field:'sql_sentence',title:'SQL语句',width:500},
+		   		{field:'params',title:'SQL参数',width:300},
 		   		{field:'version',title:'版本号',width:100},
 				{field:'status',title:'状态',width:50,
 		   			formatter: function(value){

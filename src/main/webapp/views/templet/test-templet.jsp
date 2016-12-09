@@ -10,7 +10,7 @@
     	<table cellpadding="5">
     		<tr>
     			<td>报表名称:</td>
-    			<td><yh:select name="id" url="${basePath}templet/getData.do"></yh:select></td>
+    			<td><yh:select name="template" url="${basePath}templet/getData.do"></yh:select></td>
     		</tr>
     		<tr>
     			<td>类型:</td>
@@ -20,13 +20,18 @@
     </form>
     <button onclick="show()" >展示</button>
     <button onclick="download()" >下载</button>
-    <script type="text/javascript" src="${basePath}js/fileupload/ajaxfileupload.js"></script>
-    <script type="text/javascript" src="${basePath}js/fileupload/jquery.fileupload.js"></script>
+	<script type="text/javascript" src="${basePath}js/tools.js"></script>
     <script type="text/javascript">
 		function show(){
 			if($('#test_templet_form').form('validate')){
-				$.post('${basePath}templet/saveTemplet.do',{id:$("[name=id]").val(),type:$("[name=type]").val()},function(data){
-					window.open(data);
+				var jsonData = JSON.stringify($("#test_templet_form").serializeObject());
+				$.ajax({
+					type:"post",
+					url:"${basePath}templet/saveTemplet.do",
+					data:{data:jsonData},
+					success:function(data){
+						alert(data);
+					}
 				});
 			}else{
 				alert('请完善表单数据');

@@ -14,8 +14,20 @@
     			<td><input class="easyui-textbox" type="text" name="name" value="${Templet.name }" data-options="required:true"></input></td>
     		</tr>
     		<tr>
-    			<td>状态:</td>
+    			<td>报表状态:</td>
     			<td><input class="easyui-textbox" type="text" name="status" value="${Templet.status }" data-options="required:true"></input></td>
+    		</tr>
+    		<tr>
+    			<td>报表模式:</td>
+    			<td><input class="easyui-textbox" type="text" name="mode" value="${Templet.mode }" data-options="required:true"></input></td>
+    		</tr>
+    		<tr>
+    			<td>SQL语句:</td>
+    			<td><input class="easyui-textbox" type="text" name="sql_sentence" value="${Templet.sql_sentence }"></input></td>
+    		</tr>
+    		<tr>
+    			<td>SQL参数:</td>
+    			<td><input class="easyui-textbox" type="text" name="params" value="${Templet.params }"></input></td>
     		</tr>
     		<tr>
     			<td>jasper地址:</td>

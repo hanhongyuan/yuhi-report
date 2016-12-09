@@ -2,17 +2,15 @@ package com.yuhi.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,84 +22,58 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.yuhi.common.AjaxJson;
 import com.yuhi.common.PropertiesUtil;
-import com.yuhi.datasource.StudentDataSource;
+import com.yuhi.common.Constants;
+import com.yuhi.service.AssemblyReportService;
 import com.yuhi.service.DataService;
 import com.yuhi.service.TemplateService;
-import com.yuhi.util.JasperHelper;
 
 @Controller
 @RequestMapping("/templet")
 public class TemplateController {
 	
-	private JRDataSource jrDatasource;
-
 	@Resource
 	private TemplateService templateService;
 	
 	@Resource
 	private DataService dataService;
 	
+	@Resource
+	private AssemblyReportService assemblyReportService;
+	
 	@RequestMapping(value = "/saveTemplet")
 	@ResponseBody
-    public String saveTemplet(ModelMap model,String id,
-    		String params,String type) throws JRException {
+    public String saveTemplet(String data,HttpServletRequest request) throws JRException, UnsupportedEncodingException {
+		//ISO转UTF-8
+		data = new String(data.getBytes("iso8859-1"),"UTF-8");
+		JSONObject obj = JSON.parseObject(data);
+		Integer data_id = dataService.insertEntity(obj);
+		String url = (new PropertiesUtil("application.properties")).readProperty("host.url");
 		
-		JSONObject param = new JSONObject();
-		param.put("people", "kyle");
-		
-		JSONObject data = new JSONObject();
-		data.put("template", id);
-		data.put("params", param.toJSONString());
-		data.put("type", type);
-		
-		Integer data_id = dataService.insertEntity(data);
-		
-		PropertiesUtil url = new PropertiesUtil("application.properties");
-		
-		return url.readProperty("host.url")+"checkTemplet.do?id="+data_id;
+		String callback = request.getParameter("callback");
+		return callback+"({\"url\":\""+url+"templet/checkTemplet.do?id="+data_id+"\"})";
 	}
 	
 	@RequestMapping(value = "/checkTemplet")
 	public String checkTemplet(ModelMap model,String id) throws JRException {
-		
 		JSONObject data = dataService.getEntityById(id);
-		
-		Properties parameters = JSON.parseObject(data.getString("params"), Properties.class);
-		String type = data.getString("type");
-		JSONObject template = templateService.getEntityById(data.getString("template"));
-		
-		StudentDataSource dsStudent =  new StudentDataSource();
-		jrDatasource = dsStudent.create(null);
-		
-		//模板地址
-		model.addAttribute("url", template.getString("jasperurl"));
-		//设置外部参数
-		model.addAttribute("model", parameters);
-		//设置数据源
-		model.addAttribute("jrMainDataSource", jrDatasource);
-		//设置输出类型
-		model.addAttribute("format", type);
+		JSONObject templet = templateService.getEntityById(data.getString("template"));
+		switch (templet.getInteger("mode")){
+			case Constants.ASSEMBLY_DATA:assemblyReportService.AssemblyByData(model,data,templet);break;
+			case Constants.ASSEMBLY_SOURCE:assemblyReportService.AssemblyBySource(model,data,templet);break;
+			case Constants.ASSEMBLY_DATA_SOURCE:assemblyReportService.AssemblyByDataAndSource(model,data,templet);break;
+		}
 		return "iReportView";
 	}
 	
-	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/loadTemplet")
-	public void loadTemplet(String type, String id, String params,
-            HttpServletRequest request, HttpServletResponse response) throws JRException {
-		
-		//外部参数遍历转型
-		HashedMap par= JSON.parseObject(params, HashedMap.class);
-		HashedMap parameters = par==null?new HashedMap():par;
-		
-		parameters.put("people", "kyle");
-		
-		StudentDataSource dsStudent =  new StudentDataSource();
-		jrDatasource = dsStudent.create(null);
-		
-		JSONObject t = templateService.getEntityById(id);
-		File file = new File(request.getRealPath("/")+t.getString("jasperurl"));
-		
-		JasperHelper.export(type, t.getString("name"), file, request, response, parameters, jrDatasource);
+	public void loadTemplet(String id,HttpServletRequest request,HttpServletResponse response) throws JRException {
+		JSONObject data = dataService.getEntityById(id);
+		JSONObject templet = templateService.getEntityById(data.getString("template"));
+		switch (templet.getInteger("mode")){
+			case Constants.ASSEMBLY_DATA:assemblyReportService.DownloadByData(data,templet, request, response);break;
+			case Constants.ASSEMBLY_SOURCE:assemblyReportService.DownLoadBySource(data,templet, request, response);break;
+			case Constants.ASSEMBLY_DATA_SOURCE:assemblyReportService.DownLoadBySource(data,templet, request, response);break;
+		}
 	}
 	
 	@RequestMapping(value = "/goTemplet")

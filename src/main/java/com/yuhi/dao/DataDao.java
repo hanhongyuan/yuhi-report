@@ -29,4 +29,8 @@ public class DataDao extends BaseJdbcDao{
 	public JSONObject findOneById(String id){
 		return super.queryForJsonObject("SELECT * FROM DATA WHERE ID = ?", id);
 	}
+	
+	public List<JSONObject> findAllBySQL(String SQL,Object... params){
+		return super.queryForJsonList(SQL,params);
+	}
 }
