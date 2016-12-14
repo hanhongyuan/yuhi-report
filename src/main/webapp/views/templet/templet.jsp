@@ -14,7 +14,11 @@ session.setAttribute("basePath", basePath);
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/easyui/demo.css">
   </head>
   <body>
-  	<div class="easyui-layout" style="width:1320px;height:620px;">
+	<div class="easyui-panel" style="padding:5px;width: 1320px">
+		<a href="<%=basePath%>templet/goTemplet.do" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-ok'">Template-Management</a>
+		<a href="<%=basePath%>datasource/goDataSource.do" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-ok'">DataSource-Management</a>
+	</div>
+  	<div class="easyui-layout" style="width:1320px;height:580px;">
 		<div data-options="region:'center',title:'Templet-Management',iconCls:'icon-ok'">
 			<div id="templet_tb">
 				<a class="easyui-linkbutton" iconCls="icon-add" onclick="templet_save()">添加</a>
@@ -34,11 +38,22 @@ session.setAttribute("basePath", basePath);
 		    url:'<%=basePath%>templet/getData.do',
 		    columns:[[
 		    	{field:'name',title:'报表名称',width:200},
-		    	{field:'mode',title:'报表模式',width:200},
+		    	{field:'mode',title:'报表模式',width:200,
+		   			formatter: function(value){
+		        		if(value=='0'){
+		        			return "纯外部参数";
+		        		}else if(value=='1'){
+		        			return "纯数据源参数";
+		        		}else if(value=='2'){
+		        			return "外部参数混合数据源参数";
+		        		} else{
+		        			return value;
+		        		}
+		        }},
 		   		{field:'sql_sentence',title:'SQL语句',width:500},
-		   		{field:'params',title:'SQL参数',width:300},
-		   		{field:'version',title:'版本号',width:100},
-				{field:'status',title:'状态',width:50,
+		   		{field:'params',title:'SQL参数',width:290},
+		   		{field:'version',title:'版本号',width:35},
+				{field:'status',title:'状态',width:35,
 		   			formatter: function(value){
 		        		if(value=='1'){
 		        			return "正常";
@@ -50,7 +65,7 @@ session.setAttribute("basePath", basePath);
 		    singleSelect: true,
 		    method: 'get',
 		    pageSize:10,
-		    pagination:true,
+		    /* pagination:true, *//* 暂时不实现分页功能 */
 		    toolbar: '#templet_tb'
 		}); 
 		

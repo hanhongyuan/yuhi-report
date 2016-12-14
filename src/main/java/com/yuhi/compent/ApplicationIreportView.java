@@ -42,6 +42,6 @@ public class ApplicationIreportView extends JasperReportsMultiFormatView {
 	}
 	 @Override
 	 protected JasperReport getReport() {  
-	        return this.jasperReport;  
+	        return this.jasperReport; 
 	 }
 }

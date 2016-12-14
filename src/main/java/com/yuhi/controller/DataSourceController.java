@@ -40,6 +40,7 @@ public class DataSourceController {
 	}
 	
 	@RequestMapping("/editDataSource")
+	@ResponseBody
 	public Integer editDataSource(String data){
 		JSONObject dataSource = JSON.parseObject(data);
 		if(dataSource.getInteger("id")!=null){

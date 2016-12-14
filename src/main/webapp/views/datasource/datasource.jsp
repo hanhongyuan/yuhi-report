@@ -14,7 +14,11 @@ session.setAttribute("basePath", basePath);
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/easyui/demo.css">
   </head>
   <body>
-  	<div class="easyui-layout" style="width:1320px;height:620px;">
+	<div class="easyui-panel" style="padding:5px;width: 1320px">
+		<a href="<%=basePath%>templet/goTemplet.do" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-ok'">Template-Management</a>
+		<a href="<%=basePath%>datasource/goDataSource.do" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-ok'">DataSource-Management</a>
+	</div>
+  	<div class="easyui-layout" style="width:1320px;height:580px;">
 		<div data-options="region:'center',title:'DataSource-Management',iconCls:'icon-ok'">
 			<div id="datasource_tb">
 				<a class="easyui-linkbutton" iconCls="icon-add" onclick="datasource_save()">添加</a>
@@ -48,7 +52,7 @@ session.setAttribute("basePath", basePath);
 		    singleSelect: true,
 		    method: 'get',
 		    pageSize:10,
-		    pagination:true,
+		    /* pagination:true, *//* 暂时不实现分页功能*/
 		    toolbar: '#datasource_tb'
 		}); 
 		

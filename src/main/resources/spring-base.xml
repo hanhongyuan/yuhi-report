@@ -23,7 +23,7 @@
 		<property name="order" value="0"/>
 	</bean>
 	
-	<!-- dataSource 配置 -->  
+	<!-- dataSource配置 -->  
     <bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
         <property name="driver" value="${jdbc.driver}" />
         <property name="driverUrl" value="${jdbc.url}" />
@@ -40,7 +40,7 @@
     <!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
 	<!-- 注解方式配置事物 -->

@@ -15,11 +15,11 @@
     		</tr>
     		<tr>
     			<td>报表状态:</td>
-    			<td><input class="easyui-textbox" type="text" name="status" value="${Templet.status }" data-options="required:true"></input></td>
+    			<td><input class="easyui-combobox" type="text" name="status" value="${Templet.status }" data-options="required:true,editable:false,valueField:'id',textField:'text',data:[{id:'1',text:'正常'},{id:'0',text:'禁用'}]"></input></td>
     		</tr>
     		<tr>
     			<td>报表模式:</td>
-    			<td><input class="easyui-textbox" type="text" name="mode" value="${Templet.mode }" data-options="required:true"></input></td>
+    			<td><input class="easyui-combobox" type="text" name="mode" value="${Templet.mode }" data-options="required:true,editable:false,valueField:'id',textField:'text',data:[{id:'2',text:'外部参数混合数据源参数'},{id:'1',text:'纯数据源参数'},{id:'0',text:'纯外部参数'}]"></input></td>
     		</tr>
     		<tr>
     			<td>SQL语句:</td>
