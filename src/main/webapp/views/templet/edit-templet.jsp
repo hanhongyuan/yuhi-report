@@ -11,7 +11,7 @@
     	<table cellpadding="5">
     		<tr>
     			<td>报表名称:</td>
-    			<td><input class="easyui-textbox" type="text" name="name" value="${Templet.name }" data-options="required:true"></input></td>
+    			<td><input class="easyui-textbox" isChange="${Templet.name}" type="text" name="name" value="${Templet.name }" data-options="required:true"></input></td>
     		</tr>
     		<tr>
     			<td>报表状态:</td>
@@ -49,50 +49,55 @@
    			<td id="jrxml_td"><input id="jrxml" type="file" name="jrxml" value=""><button onclick="uploadfile('jrxml')">上传</button></td>
    		</tr>
     </table>
+    <button onclick="isChange()">TEST</button>
     <script type="text/javascript" src="${basePath}js/fileupload/ajaxfileupload.js"></script>
     <script type="text/javascript" src="${basePath}js/fileupload/jquery.fileupload.js"></script>
     <script type="text/javascript" src="${basePath}js/tools.js"></script>
     <script type="text/javascript">
-    	var jasperurl_old = '${Templet.jasperurl}';
-    	var jrxmlurl_old = '${Templet.jrxmlurl}';
-    	var TempletId = '${Templet.id}';
+    	//var jasperurl_old = '${Templet.jasperurl}';
+    	//var jrxmlurl_old = '${Templet.jrxmlurl}';
+    	//var TempletId = '${Templet.id}';
     	var TempletVersion = '${Templet.version}'==""?0:'${Templet.version}';
     	var version_flag = 0;
     	
+    	var Templet = '${Templet}'==""?"":JSON.parse('${Templet}');
+    	
     	function sendform(){
 			if($('#templet_form').form('validate')){
-				if(version_flag)$("[name=version]").val(Number(TempletVersion)+1);
-				var jsonData = JSON.stringify($("#templet_form").serializeObject());
-				$.ajax({
-					type:"post",
-					url:"${basePath}templet/editTemplet.do",
-					data:{data:jsonData},
-					success:function(data){
-						if(data>=0){
-							msg("成功");
-					    	closeDialog($("#templet_edit"));
-					    	$("#templet_table").datagrid("reload");
-						} else {
-							msg("异常");
+				if(isChange(Templet)){
+					if(version_flag)$("[name=version]").val(Number(TempletVersion)+1);
+					var jsonData = JSON.stringify($("#templet_form").serializeObject());
+					$.ajax({
+						type:"post",
+						url:"${basePath}templet/editTemplet.do",
+						data:{data:jsonData},
+						success:function(data){
+							if(data>=0){
+								msg("成功");
+						    	closeDialog($("#templet_edit"));
+						    	$("#templet_table").datagrid("reload");
+							} else {
+								msg("异常");
+							}
 						}
-					}
-				});
+					});
+				}else{
+					$('#templet_edit').dialog("close");
+				}
 			}else{
 				alert('请完善表单数据');
 			}
-		} 
-		
+		}
+    	
 		function cancelform(){
-			if(jasperurl_old!=$("#jasperurl").val()){
-			alert('jasperurl');
+			if(Templet.jasperurl!=$("#jasperurl").val()){
 				$.post('${basePath}templet/dropfile.do',{file:$("#jasperurl").val()},function(flag){
 					if(flag){
 						console.info('jasper文件回删成功!'); 
 					}
 				});
 			}
-			if(jrxmlurl_old!=$("#jrxmlurl").val()){
-			alert('jrxmlurl');
+			if(Templet.jrxmlurl!=$("#jrxmlurl").val()){
 				$.post('${basePath}templet/dropfile.do',{file:$("#jrxmlurl").val()},function(flag){
 					if(flag){
 						console.info('jrxml文件回删成功!'); 
@@ -105,13 +110,13 @@
 			var name = document.getElementById(id).value.substring(document.getElementById(id).value.lastIndexOf("."));
 			if(name==""){
 				alert("请选择文件!");
-				return
+				return;
 			} else if(name.substring(name.lastIndexOf("."))!="."+id){
 				alert("请选择后缀名为"+id+"的文件!");
-				return
+				return;
 			}
 			$.ajaxFileUpload({
-               	url:"${basePath}templet/uploadfile.do?type="+id+"&id="+TempletId+"&version="+TempletVersion,
+               	url:"${basePath}templet/uploadfile.do?type="+id+"&id="+Templet.id+"&version="+TempletVersion,
                	secureuri:false,
                	fileElementId:id,
               	dataType: 'json',

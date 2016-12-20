@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-  </head>
+  </head> 
   <body>
   	<form id="datasource_form" method="post">
   		<input type="hidden" name="id" value="${DataSource.id}">
@@ -28,23 +28,29 @@
     </form>
     <script type="text/javascript" src="${basePath}js/tools.js"></script>
     <script type="text/javascript">
+		var DataSource = '${DataSource}'==""?"":JSON.parse('${DataSource}');
+    
     	function sendform(){
 			if($('#datasource_form').form('validate')){
-				var jsonData = JSON.stringify($("#datasource_form").serializeObject());
-				$.ajax({
-					type:"post",
-					url:"${basePath}datasource/editDataSource.do",
-					data:{data:jsonData},
-					success:function(data){
-						if(data>=0){
-							msg("成功");
-					    	closeDialog($("#datasource_edit"));
-					    	$("#datasource_table").datagrid("reload");
-						} else {
-							msg("异常");
+				if(isChange(DataSource)){
+					var jsonData = JSON.stringify($("#datasource_form").serializeObject());
+					$.ajax({
+						type:"post",
+						url:"${basePath}datasource/editDataSource.do",
+						data:{data:jsonData},
+						success:function(data){
+							if(data>=0){
+								msg("成功");
+						    	closeDialog($("#datasource_edit"));
+						    	$("#datasource_table").datagrid("reload");
+							} else {
+								msg("异常");
+							}
 						}
-					}
-				});
+					});
+				}else{
+					$('#datasource_edit').dialog("close");
+				}
 			}else{
 				alert('请完善表单数据');
 			}

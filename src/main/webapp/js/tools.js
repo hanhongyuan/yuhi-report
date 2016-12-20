@@ -14,3 +14,21 @@ $.fn.serializeObject = function(){
    });    
    return o;
 }; 
+
+/*
+ * 判断传入Object与表单是否发生改变
+ * return 0:没有变化/1发生改变
+ */
+function isChange(Templet){
+	var all_input = document.getElementsByTagName('input');
+	for(var i=0;i<all_input.length;i++){
+		var name = all_input[i].name;
+		var value = all_input[i].value;
+		if(name!=''&&Templet.hasOwnProperty(name)){
+			if(Templet[name]!=value){
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
