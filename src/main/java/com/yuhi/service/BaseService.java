@@ -5,7 +5,7 @@ import com.yuhi.common.AjaxJson;
 
 public interface BaseService {
 
-	public AjaxJson getEntityList();
+	public JSONObject getEntityList();
 	
 	public JSONObject getEntityById(String id);
 	

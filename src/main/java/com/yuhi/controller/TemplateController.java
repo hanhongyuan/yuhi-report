@@ -3,6 +3,8 @@ package com.yuhi.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -21,8 +23,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.yuhi.common.AjaxJson;
+import com.yuhi.common.MapData;
 import com.yuhi.common.PropertiesUtil;
 import com.yuhi.common.Constants;
+import com.yuhi.entity.Data;
 import com.yuhi.service.AssemblyReportService;
 import com.yuhi.service.DataService;
 import com.yuhi.service.TemplateService;
@@ -76,24 +80,27 @@ public class TemplateController {
 		}
 	}
 	
-	@RequestMapping(value = "/goTemplet")
+	@RequestMapping(params = "go")
 	public String goTemplet(){
-		return "views/templet/templet";
+		return "modules/templet/templet-list";
 	}
 	
 	@RequestMapping(value = "/getData")
 	@ResponseBody
-	public AjaxJson getData() {
-		AjaxJson data = templateService.getEntityList();
+	public JSONObject getData() {
+//		AjaxJson data = templateService.getEntityList();
+		JSONObject data = templateService.getEntityList();
 		return data;
 	}
 	
-	@RequestMapping(value = "/goEditTemplet")
+	@RequestMapping(params = "goEdit")
 	public String goEditTemplet(ModelMap map,String id){
 		if(id!=null){
 			map.put("Templet", templateService.getEntityById(id));
+		}else {
+			map.put("Templet",new JSONObject());
 		}
-		return "views/templet/edit-templet";
+		return "modules/templet/comp/templet-edit";
 	}
 	
 	@RequestMapping(value = "/goTestTemplet")
@@ -103,12 +110,13 @@ public class TemplateController {
 	
 	@RequestMapping(value = "/editTemplet")
 	@ResponseBody
-	public int editTemplet(String data){
-		JSONObject templet = JSON.parseObject(data);
+	public int editTemplet(HttpServletRequest req){
+//		MapData md=new MapData(req);
+		JSONObject templet = new JSONObject(new MapData(req));
 		if(templet.getInteger("id")!=null){
 			return templateService.updateEntity(templet);
 		}else {
-			templet.remove("id");
+//			templet.remove("id");
 			return templateService.insertEntity(templet);
 		}
 	}
@@ -116,8 +124,8 @@ public class TemplateController {
 	@RequestMapping(value = "/uploadfile")
 	@ResponseBody
 	public String uploadfile(HttpServletRequest req,String type,String id,Integer version) throws IllegalStateException, IOException{
-		@SuppressWarnings("deprecation")
-		String rootPath = req.getRealPath("/");
+		//		String rootPath = req.getRealPath("/");
+		String rootPath = "G:\\apache-tomcat-7.0.57-windows-x64\\apache-tomcat-7.0.57\\webapps\\file";
 		JSONObject obj=new JSONObject();
 		if(req instanceof MultipartHttpServletRequest){
 			MultipartFile pictureFile=	((MultipartHttpServletRequest) req).getMultiFileMap().getFirst(type);

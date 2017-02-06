@@ -49,14 +49,10 @@
    			<td id="jrxml_td"><input id="jrxml" type="file" name="jrxml" value=""><button onclick="uploadfile('jrxml')">上传</button></td>
    		</tr>
     </table>
-    <button onclick="isChange()">TEST</button>
     <script type="text/javascript" src="${basePath}js/fileupload/ajaxfileupload.js"></script>
     <script type="text/javascript" src="${basePath}js/fileupload/jquery.fileupload.js"></script>
     <script type="text/javascript" src="${basePath}js/tools.js"></script>
     <script type="text/javascript">
-    	//var jasperurl_old = '${Templet.jasperurl}';
-    	//var jrxmlurl_old = '${Templet.jrxmlurl}';
-    	//var TempletId = '${Templet.id}';
     	var TempletVersion = '${Templet.version}'==""?0:'${Templet.version}';
     	var version_flag = 0;
     	

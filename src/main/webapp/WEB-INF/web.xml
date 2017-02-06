@@ -7,6 +7,9 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring-base.xml</param-value>
   </context-param>
+  <welcome-file-list>
+    <welcome-file>/pages/index.html</welcome-file>
+  </welcome-file-list>
   <!-- Spring 编码过滤器 start -->
   <filter>
 	<filter-name>characterEncoding</filter-name>

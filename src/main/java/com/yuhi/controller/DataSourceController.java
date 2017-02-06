@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.yuhi.common.AjaxJson;
 import com.yuhi.service.DataSourceService;
 
 @Controller
 @RequestMapping("/datasource")
 public class DataSourceController {
-
+	
 	@Resource
 	private DataSourceService dataSourceService;
 	
-	@RequestMapping("/goDataSource")
+	@RequestMapping("/go")
 	public String goDataSource(){
-		return "views/datasource/datasource";
+		return "modules/datasource/datasource-list";
 	}
 	
 	@RequestMapping("/getData")
 	@ResponseBody
-	public AjaxJson getData(){
-		AjaxJson data = dataSourceService.getEntityList();
+	public JSONObject getData(){
+//		AjaxJson data = dataSourceService.getEntityList();
+		JSONObject data = dataSourceService.getEntityList();
 		return data;
 	}
 	

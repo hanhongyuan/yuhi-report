@@ -1,6 +1,10 @@
 package com.yuhi.entity;
 
+import java.util.Map;
+
 public class Data {
+	
+	private Map<String,Object> map;
 	private Integer id;
 	
 	private String key;
@@ -16,7 +20,17 @@ public class Data {
 	public Data(){
 		
 	}
-	
+	public Object getMap(String key) {
+		return map.get(key);
+	}
+	public Map<String, Object> getMap() {
+		return map;
+	}
+
+	public void setMap(Map<String, Object> map) {
+		this.map = map;
+	}
+
 	public Data(Integer id,String template,String params,String type,String datasource,
 			String key){
 		this.id = id;

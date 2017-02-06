@@ -20,18 +20,42 @@
     <mvc:annotation-driven />
     
     <!-- 静态资源文件，不会被Spring MVC拦截 -->
-    <mvc:resources location="/css" mapping="/css/**"/>
+    <mvc:resources location="/resource/" mapping="/resource/**"/>
+	<mvc:resources location="/resource/plugins/**/**/**" mapping="/resource/plugins/**/**/**"/>
+    <!-- <mvc:resources location="/css" mapping="/css/**"/>
     <mvc:resources location="/js" mapping="/js/**"/>
     <mvc:resources location="/images" mapping="/images/**"/>
-    <mvc:resources location="/fonts" mapping="/fonts/**"/>
+    <mvc:resources location="/fonts" mapping="/fonts/**"/> -->
     
 	<!-- JSP视图解析器-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+    <!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <property name="prefix" value="/" />  
         <property name="suffix" value=".jsp" />
-		<!--  定义其解析视图的order顺序为1 -->
+		 定义其解析视图的order顺序为1
         <property name="order" value="1" />
-    </bean>
+    </bean> -->
+    <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+	    <property name="prefix" value="/pages/" />
+	    <property name="suffix" value=".html" />
+	    <property name="templateMode" value="HTML5" />
+	    <property name="characterEncoding" value="utf-8"></property>
+	    <property name="cacheable" value="false"></property>
+	    <property name="order" value="3"></property>
+	</bean>
+    
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+	</bean>
+ 
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		<property name="characterEncoding" value="utf-8"></property>
+	</bean>
+	
+	<!-- Bean解析器,级别高于默认解析器,寻找bean对象进行二次处理 -->
+	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"></property>
+	</bean>
     
 	<!-- 支持返回json(避免IE在ajax请求时，返回json出现下载 ) -->  
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  

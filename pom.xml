@@ -178,12 +178,14 @@
 			<version>4.12</version> 
 			<scope>test</scope> 
 		</dependency> -->
+		
+		
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>4.1.5.RELEASE</version>
-		</dependency>
-		<dependency>
+  			<groupId>com.yuhi</groupId>
+  			<artifactId>yuhi-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+  		</dependency>
+  		<dependency>
 		    <groupId>net.sf.jasperreports</groupId>
 		    <artifactId>jasperreports</artifactId>
 		    <version>5.6.0</version>
@@ -194,11 +196,11 @@
 		    	</exclusion>
 		    </exclusions>
 		   </dependency>
-		<dependency>
-  			<groupId>com.yuhi</groupId>
-  			<artifactId>yuhi-com</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-  		</dependency>
+  		 <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.2.5.RELEASE</version>
+		</dependency> 
   		<dependency>
 		    <groupId>commons-fileupload</groupId>
 		    <artifactId>commons-fileupload</artifactId>
@@ -208,6 +210,22 @@
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.26</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid</artifactId>
+		    <version>1.0.5</version>
+		</dependency>
+		<!-- 模板 -->  
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring4</artifactId>
+			<version>2.1.2.RELEASE</version>
 		</dependency>
 	</dependencies>
 

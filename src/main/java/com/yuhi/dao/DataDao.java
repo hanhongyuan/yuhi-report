@@ -5,20 +5,19 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yuhi.base.BaseJdbcDao;
+import com.yuhi.base.JdbcTemplatesDao;
 import com.yuhi.common.BaseTools;
 
 @Component
-public class DataDao extends BaseJdbcDao{
+public class DataDao extends JdbcTemplatesDao{
 	
-	private static final String SQL_TABLE_NAME = "DATA";
 	
 	public Integer save(JSONObject jsonObject) {
-		return super.insertOrReturnId(SQL_TABLE_NAME, jsonObject);
+		return super.insertOrReturnId(jsonObject);
 	}
 	
 	public Integer update(JSONObject jsonObject) {
-		super.update(SQL_TABLE_NAME, BaseTools.JsonToMap(jsonObject), jsonObject.getString("id"));
+		super.update(BaseTools.JsonToMap(jsonObject), jsonObject.getString("id"));
 		return jsonObject.getInteger("id");
 	}
 	
@@ -31,6 +30,14 @@ public class DataDao extends BaseJdbcDao{
 	}
 	
 	public List<JSONObject> findAllBySQL(String SQL,Object... params){
+		if(params[0].equals("")){
+			return super.queryForJsonList(SQL);
+		}
 		return super.queryForJsonList(SQL,params);
+	}
+
+	@Override
+	protected String setControllerTable() {
+		return "DATA";
 	}
 }

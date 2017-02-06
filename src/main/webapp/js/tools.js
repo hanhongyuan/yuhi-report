@@ -20,6 +20,9 @@ $.fn.serializeObject = function(){
  * return 0:没有变化/1发生改变
  */
 function isChange(Templet){
+	if(Templet==""){
+		return 1;
+	}
 	var all_input = document.getElementsByTagName('input');
 	for(var i=0;i<all_input.length;i++){
 		var name = all_input[i].name;

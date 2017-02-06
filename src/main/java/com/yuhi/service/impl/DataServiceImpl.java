@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 import com.yuhi.common.AjaxJson;
 import com.yuhi.dao.DataDao;
 import com.yuhi.service.DataService;
@@ -15,9 +16,10 @@ public class DataServiceImpl implements DataService{
 	public DataDao dao;
 	
 	@Override
-	public AjaxJson getEntityList() {
-		AjaxJson data = new AjaxJson();
-		data.setObj(dao.findAll());
+	public JSONObject getEntityList() {
+//		AjaxJson data = new AjaxJson();
+//		data.setObj(dao.findAll());
+		JSONObject data = new JSONObject();
 		return data;
 	}
 

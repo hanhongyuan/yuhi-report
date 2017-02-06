@@ -54,8 +54,7 @@ public class JasperHelper {
          */
         if ("excel".equals(type))
             try {
-                Field margin = JRBaseReport.class
-                        .getDeclaredField("leftMargin");
+                Field margin = JRBaseReport.class.getDeclaredField("leftMargin");
                 margin.setAccessible(true);
                 margin.setInt(jasperReport, 0);
                 margin = JRBaseReport.class.getDeclaredField("topMargin");
@@ -64,54 +63,11 @@ public class JasperHelper {
                 margin = JRBaseReport.class.getDeclaredField("bottomMargin");
                 margin.setAccessible(true);
                 margin.setInt(jasperReport, 0);
-                Field pageHeight = JRBaseReport.class
-                        .getDeclaredField("pageHeight");
+                Field pageHeight = JRBaseReport.class.getDeclaredField("pageHeight");
                 pageHeight.setAccessible(true);
                 pageHeight.setInt(jasperReport, 2147483647);
             } catch (Exception exception) {
             }
-    }
-
-    /**
-     * 导出excel
-     */
-    public static void exportExcel(JasperPrint jasperPrint,
-            String defaultFilename, HttpServletRequest request,
-            HttpServletResponse response) throws IOException, JRException {
-        /*
-         * 设置头信息
-         */
-        response.setContentType("application/vnd.ms-excel");
-        String defaultname = null;
-        if (defaultFilename.trim() != null && defaultFilename != null) {
-            defaultname = defaultFilename + ".xls";
-        } else {
-            defaultname = "export.xls";
-        }
-
-        response.setHeader("Content-Disposition", "attachment; filename=\""
-                + URLEncoder.encode(defaultname, "UTF-8") + "\"");
-
-
-        ServletOutputStream ouputStream = response.getOutputStream();
-        JRXlsExporter exporter = new JRXlsExporter();
-
-        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-
-        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, ouputStream);
-
-        exporter.setParameter(
-                JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS,
-                Boolean.TRUE); // 删除记录最下面的空行
-
-        exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET,
-                Boolean.FALSE);// 删除多余的ColumnHeader
-        //
-        exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND,
-                Boolean.FALSE);// 显示边框
-        exporter.exportReport();
-        ouputStream.flush();
-        ouputStream.close();
     }
 
     public static enum DocType {
@@ -120,21 +76,11 @@ public class JasperHelper {
     public static JRAbstractExporter getJRExporter(DocType docType) {
         JRAbstractExporter exporter = null;
         switch (docType) {
-        case PDF:
-            exporter = new JRPdfExporter();
-            break;
-        case HTML:
-            exporter = new JRHtmlExporter();
-            break;
-        case XLS:
-            exporter = new JExcelApiExporter();
-            break;
-        case XML:
-            exporter = new JRXmlExporter();
-            break;
-        case RTF:
-            exporter = new JRRtfExporter();
-            break;
+	        case PDF:exporter = new JRPdfExporter();break;
+	        case HTML:exporter = new JRHtmlExporter();break;
+	        case XLS:exporter = new JExcelApiExporter();break;
+	        case XML:exporter = new JRXmlExporter();break;
+	        case RTF:exporter = new JRRtfExporter();break;
         }
         return exporter;
     }
@@ -158,14 +104,45 @@ public class JasperHelper {
             defaultname = "export.pdf";
         }
         String fileName = new String(defaultname.getBytes("GBK"), "ISO8859_1");
-        response.setHeader("Content-disposition", "attachment; filename="
-                + fileName);
+        response.setHeader("Content-disposition", "attachment; filename=" + fileName);
         ServletOutputStream ouputStream = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(jasperPrint, ouputStream);
         ouputStream.flush();
         ouputStream.close();
     }
 
+    /**
+     * 导出excel
+     */
+    public static void exportExcel(JasperPrint jasperPrint,
+            String defaultFilename, HttpServletRequest request,
+            HttpServletResponse response) throws IOException, JRException {
+        /*
+         * 设置头信息
+         */
+        response.setContentType("application/vnd.ms-excel");
+        String defaultname = null;
+        if (defaultFilename.trim() != null && defaultFilename != null) {
+            defaultname = defaultFilename + ".xls";
+        } else {
+            defaultname = "export.xls";
+        }
+
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(defaultname, "UTF-8") + "\"");
+
+        ServletOutputStream ouputStream = response.getOutputStream();
+        JRXlsExporter exporter = new JRXlsExporter();
+
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, ouputStream);
+        exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS,Boolean.TRUE); // 删除记录最下面的空行
+        exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET,Boolean.FALSE);// 删除多余的ColumnHeader
+        exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND,Boolean.FALSE);// 显示边框
+        exporter.exportReport();
+        ouputStream.flush();
+        ouputStream.close();
+    }
+    
     /**
      * 导出html
      */
@@ -175,12 +152,17 @@ public class JasperHelper {
         response.setContentType("text/html");
         ServletOutputStream ouputStream = response.getOutputStream();
         JRHtmlExporter exporter = new JRHtmlExporter();
-        exporter.setParameter(JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,
-                Boolean.FALSE);
+        exporter.setParameter(JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,Boolean.FALSE);
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
         exporter.setParameter(JRExporterParameter.CHARACTER_ENCODING, "UTF-8");
         exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, ouputStream);
-
+        
+        //解决图片显示问题
+        exporter.setParameter(JRHtmlExporterParameter.IMAGES_DIR_NAME, "/");
+        exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, "s");
+        exporter.setParameter(JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN, Boolean.TRUE);
+        exporter.setParameter(JRHtmlExporterParameter.IS_OUTPUT_IMAGES_TO_DIR, Boolean.TRUE);
+        //结束 
         exporter.exportReport();
 
         ouputStream.flush();
@@ -201,12 +183,10 @@ public class JasperHelper {
             defaultname = "export.doc";
         }
         String fileName = new String(defaultname.getBytes("GBK"), "utf-8");
-        response.setHeader("Content-disposition", "attachment; filename="
-                + fileName);
+        response.setHeader("Content-disposition", "attachment; filename=" + fileName);
         JRExporter exporter = new JRRtfExporter();
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,
-                response.getOutputStream());
+        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,response.getOutputStream());
 
         exporter.exportReport();
     }
@@ -214,12 +194,9 @@ public class JasperHelper {
     /**
      * 按照类型导出不同格式文件
      * 
-     * @param datas
-     *            数据
-     * @param type
-     *            文件类型
-     * @param is
-     *            jasper文件的来源
+     * @param datas 数据
+     * @param type 文件类型
+     * @param is jasper文件的来源
      * @param request
      * @param response
      * @param defaultFilename默认的导出文件的名称
@@ -231,8 +208,7 @@ public class JasperHelper {
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is);
             prepareReport(jasperReport, type);
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(
-                    jasperReport, parameters, conn);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
 
             if (EXCEL_TYPE.equals(type)) {
                 exportExcel(jasperPrint, defaultFilename, request, response);
@@ -254,8 +230,7 @@ public class JasperHelper {
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is);
             prepareReport(jasperReport, type);
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(
-                    jasperReport, parameters, conn);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
 
             if (EXCEL_TYPE.equals(type)) {
                 exportExcel(jasperPrint, defaultFilename, request, response);
@@ -270,7 +245,6 @@ public class JasperHelper {
             e.printStackTrace();
         }
     }
-
 
     /**
      * 输出html静态页面，必须注入request和response
@@ -288,26 +262,20 @@ public class JasperHelper {
             HttpServletRequest request, HttpServletResponse response, Map parameters,
             JRDataSource conn) throws JRException, IOException {
 
-
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
 
         JRAbstractExporter exporter = getJRExporter(DocType.HTML);
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(reportfile,
-                parameters, conn);
-        request.getSession().setAttribute(
-                ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,
-                jasperPrint);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reportfile,parameters, conn);
+        request.getSession().setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,jasperPrint);
 
         PrintWriter out = response.getWriter();
 
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
         exporter.setParameter(JRExporterParameter.OUTPUT_WRITER, out);
-        exporter.setParameter(
-        JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,
-        Boolean.FALSE);
+        exporter.setParameter(JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,Boolean.FALSE);
         exporter.exportReport();
         out.flush();
 
@@ -317,26 +285,20 @@ public class JasperHelper {
             HttpServletRequest request, HttpServletResponse response, Map parameters,
             Connection conn) throws JRException, IOException {
 
-
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
 
         JRAbstractExporter exporter = getJRExporter(DocType.HTML);
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(reportfile,
-                parameters, conn);
-        request.getSession().setAttribute(
-                ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,
-                jasperPrint);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reportfile,parameters, conn);
+        request.getSession().setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,jasperPrint);
 
         PrintWriter out = response.getWriter();
 
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
         exporter.setParameter(JRExporterParameter.OUTPUT_WRITER, out);
-        exporter.setParameter(
-        JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,
-        Boolean.FALSE);
+        exporter.setParameter(JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,Boolean.FALSE);
         exporter.exportReport();
         out.flush();
 
@@ -364,27 +326,20 @@ public class JasperHelper {
 
         JRAbstractExporter exporter = getJRExporter(DocType.PDF);
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(reportfile,
-                parameters, conn);
-        request.getSession().setAttribute(
-                ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,
-                jasperPrint);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reportfile,parameters, conn);
+        request.getSession().setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,jasperPrint);
 
         PrintWriter out = response.getWriter();
 
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
         exporter.setParameter(JRExporterParameter.OUTPUT_WRITER, out);
-        exporter.setParameter(
-        JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,
-        Boolean.FALSE);
+        exporter.setParameter(JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,Boolean.FALSE);
         exporter.exportReport();
         out.flush();
-
     }
     public static void showPdf(String defaultFilename, String reportfile,
             HttpServletRequest request, HttpServletResponse response, Map parameters,
             Connection conn) throws JRException, IOException {
-
 
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
@@ -393,11 +348,8 @@ public class JasperHelper {
 
         JRAbstractExporter exporter = getJRExporter(DocType.PDF);
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(reportfile,
-                parameters, conn);
-        request.getSession().setAttribute(
-                ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,
-                jasperPrint);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reportfile,parameters, conn);
+        request.getSession().setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,jasperPrint);
 
         PrintWriter out = response.getWriter();
 
@@ -405,9 +357,7 @@ public class JasperHelper {
         exporter.setParameter(JRExporterParameter.OUTPUT_WRITER, out);
         exporter.exportReport();
         out.flush();
-
     }
-    
     
     public static void main(String[] args) {
     	Properties parameters = new Properties();
@@ -417,6 +367,4 @@ public class JasperHelper {
     	
     	parameters =JSON.parseObject(str, Properties.class);
 	}
-
-
 }

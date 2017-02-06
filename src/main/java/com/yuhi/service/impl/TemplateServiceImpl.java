@@ -16,10 +16,14 @@ public class TemplateServiceImpl implements TemplateService {
 	@Autowired
 	public TemplateDao dao;
 	
-	@Override
-	public AjaxJson getEntityList() {
-		AjaxJson data = new AjaxJson();
-		data.setObj(dao.findAll());
+	public JSONObject getEntityList() {
+//		AjaxJson data = new AjaxJson();
+//		data.setObj(dao.findAll());
+		JSONObject data = new JSONObject();
+		data.put("success", Boolean.TRUE);
+		data.put("totalRows", 10);
+		data.put("curPage", 1);
+		data.put("data", dao.findAll());
 		return data;
 	}
 
