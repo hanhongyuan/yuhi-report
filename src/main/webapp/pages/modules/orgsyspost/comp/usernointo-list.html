@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="modules/base/contentTemplate::cssres">
+<meta charset="UTF-8" />
+</head>
+<style type="text/css">
+.layui-form input[type=checkbox] {
+	display: inline-block;
+	margin: 0 auto;
+}
+</style>
+<body>
+	<div class="admin-main">
+
+		<div class="site-demo">
+
+			<form id="orgForm" class="layui-form layui-form-pane" method="get">
+				<!-- 数据表格 -->
+				<fieldset class="layui-elem-field">
+					<legend>角色管理</legend>
+					<input type="hidden" id="postid" th:value="${postid}"/>
+					<!-- 数据表格 -->
+					<div class="site-demo-editor">
+					<table id="searchTable">
+						<tr>
+							<th w_check="true" w_index="id" width="3%;"></th>
+							<th w_index="id" w_sort="id" w_hidden="true" width="5%;">ID</th>
+							<th w_index="name" width="5%;">名称</th>
+							<th w_index="available" w_render="fieldoperate" width="5%;">可用</th>
+							<th w_index="descs" width="5%;">描述</th>
+						</tr>
+					</table>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+<script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/plugins/jquery-1.4.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/builds/js/lang/grid.zh-CN.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/builds/merged/bsgrid.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resource/plugins/layui/layui.js}"></script>
+
+	<script type="text/javascript">
+		var gridObj;
+ 		var citynodes = [];  
+ 		var zTreeDemo;
+ 		var selectrowid;
+ 		function getcheckrole(){
+ 			var index=gridObj.getCheckedRowsRecords();
+			var ids='';
+			for ( var elem in index) {
+				ids+=index[elem].id+",";
+			}
+			return ids; 
+ 		}
+ 		
+ 		/**数据表格**/
+		function fieldoperate(record, rowIndex, colIndex, options) {
+        	console.log(colIndex);
+        	switch (colIndex) {
+			case 6:
+				return record.state>0?'可用':'禁用';
+			}
+        }	
+        $(function () {
+            gridObj = $.fn.bsgrid.init('searchTable', {
+                url: 'SysRoleController/noIntoPostRole.do?postid='+$("#postid").val(),
+                // autoLoad: false,
+                ajaxType: 'GET',
+                stripeRows: true,
+                pageSizeSelect: true,
+                displayBlankRows: true,
+                multiSort: true, // multi column sort support, default false
+                pageSize: 10,
+                event: {
+                    customRowEvents: {
+                        click: function (record, rowIndex, trObj, options) {
+                        		trObj[0].children[0].children[0].checked=!trObj[0].children[0].children[0].checked;
+                        }
+                    }
+                }
+            });
+        });
+	</script>
+</body>
+
+</html>

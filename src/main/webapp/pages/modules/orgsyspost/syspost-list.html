@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="modules/base/contentTemplate::cssres">
+<meta charset="UTF-8" />
+</head>
+<style type="text/css">
+.layui-form input[type=checkbox]{
+    display: inline-block;
+    margin: 0 auto;
+}
+</style>
+<body>
+
+	<div class="admin-main">
+		
+		<div class="site-demo" >
+		
+		<!-- 组织树 -->
+		<div class="site-demo-result " style=" width: 19%;height:100%;border: 1px #e2e2e2 solid;">
+			 <fieldset class="layui-elem-field hresult-4" style="overflow: hidden;">
+			<legend>组织架构</legend>
+			 <center style="background-color: #D8D8D8;">
+			<div class="layui-inline" >
+						<!-- <button class="layui-btn layui-btn-mini">
+						  <i class="layui-icon">&#xe615;</i>
+						</button> -->
+						<button class="layui-btn layui-btn-mini layui-btn-warm" onclick="addOrg()">
+						  <i class="layui-icon">&#xe608;</i>
+						</button>
+						<!-- <button class="layui-btn layui-btn-mini layui-btn-normal">
+						  <i class="layui-icon">&#xe642;</i>
+						</button> -->
+						<button class="layui-btn layui-btn-mini layui-btn-danger" onclick="delOrg()">
+						  <i class="layui-icon">&#xe640;</i>
+						</button>
+			</div>
+			</center>
+			 <ul id="treeDemo" class="ztree"></ul>
+			</fieldset>
+			
+			 <fieldset class="layui-elem-field hresult-5" >
+			<legend>岗位角色</legend>
+			<!--  <center style="background-color: #D8D8D8;">
+			<div class="layui-inline" >
+						<button class="layui-btn layui-btn-mini">
+						  <i class="layui-icon">&#xe615;</i>
+						</button>
+						<button class="layui-btn layui-btn-mini layui-btn-warm">
+						  <i class="layui-icon">&#xe608;</i>
+						</button>
+						<button class="layui-btn layui-btn-mini layui-btn-normal">
+						  <i class="layui-icon">&#xe642;</i>
+						</button>
+						<button class="layui-btn layui-btn-mini layui-btn-danger">
+						  <i class="layui-icon">&#xe640;</i>
+						</button>
+			</div>
+			</center> -->
+				<div class="layui-inline" style="width:100%; margin: 10px 0;text-indent:2em;">当前选择:<span class="postname">无</span></div>
+				<div id="roleTable">
+				</div>
+			</fieldset>
+	    </div>   
+		<!-- 岗位组织 -->
+		<div class="site-demo-editor result-8">
+		<form id="orgForm" class="layui-form layui-form-pane" method="get">
+			<fieldset class="layui-elem-field hresult-4" style="overflow: hidden;">
+			<legend>组织信息</legend>
+<input type="hidden" name="id"/>
+				<div class="layui-form-item" style="margin-top: 10px;">
+						<label class="layui-form-label">组织代码</label>
+						<div class="layui-input-block">
+							<input type="text" name="orgcode" lay-verify="title" autocomplete="off" placeholder="请输入组织代码" class="layui-input"/>
+						</div>
+				</div>
+				<div class="layui-form-item">
+						<label class="layui-form-label">组织名称</label>
+						<div class="layui-input-block">
+							<input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入组织名称" class="layui-input"/>
+						</div>
+				</div>
+				<div class="layui-form-item">
+						<label class="layui-form-label">父组织代码</label>
+						<div class="layui-input-block">
+							<input type="text" name="porgcode" lay-verify="title" autocomplete="off" placeholder="请输入父组织代码" class="layui-input"/>
+						</div>
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">创建日期</label>
+						<div class="layui-input-block">
+							<input type="text" name="createtime" id="date" lay-verify="date" placeholder="YYYY-MM-DD hh:mm:ss" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"/>
+						</div>
+					</div>
+					<div class="layui-inline">
+						<div class="layui-input-block">
+							基层机构&nbsp;&nbsp;<input type="checkbox"  name="switchs" />
+						</div>
+					</div>
+					<div class="layui-inline">	
+						 <div class="layui-input-block">
+						     启用 &nbsp;&nbsp; <input type="checkbox"  name="flag" />
+						  </div>
+					</div>
+				</div>
+				<div class="layui-form-item">
+				    <div class="layui-input-block">
+				      <button class="layui-btn" type="button" onclick="saveOrg()">保存</button>
+				    </div>
+				 </div>
+			</fieldset>
+		
+		<!-- 数据表格 -->
+			<fieldset class="layui-elem-field hresult-5">
+			<legend>包含岗位</legend>
+				<!-- 搜索查询框  -->
+				<blockquote class="layui-elem-quote">
+						<div class="layui-inline">
+							<label class="layui-form-label">查询选项</label>
+							<div class="layui-input-inline">
+								<select name="serachfiled"  style="display: block;" class="selectpanel">
+									<option value="name">岗位名称</option>
+									<option value="type" >岗位类型</option>
+									<option value="orgid">所属组织</option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<div class="layui-input-inline">
+								<input type="text" name="keyword" value="" placeholder="请输入关键词"
+									class="layui-input" />
+							</div>
+						</div>
+						<div class="layui-inline">
+							<button class="layui-btn" type="button" id="search"
+								onclick="searchobj()">搜索</button>
+						</div>
+				</blockquote>
+				<!-- 操作区 -->
+				<blockquote class="layui-elem-quote layui-quote-nm">
+					<a href="javascript:;" class="layui-btn layui-btn-small" id="add"
+						onclick="addobj()"> <i class="layui-icon">&#xe608;</i> 添加
+					</a> <a href="javascript:;" class="layui-btn layui-btn-small"
+						onclick="updateobj()" id="update"> <i class="layui-icon">&#xe608;</i>
+						修改
+					</a> <a href="javascript:;" class="layui-btn layui-btn-small"
+						onclick="deleteObj()" id="delete"> <i class="layui-icon">&#xe608;</i>
+						删除
+					</a>  <a href="#" class="layui-btn layui-btn-small" onclick="addusertoRole()" id="upload"> <i
+								class="layui-icon" >&#xe615;</i> 添加岗位角色
+					</a><a href="#" class="layui-btn layui-btn-small" id="upload"> <i
+						class="layui-icon">&#xe615;</i> 上传附件
+					</a> <a href="#" class="layui-btn layui-btn-small" id="delfile"> <i
+						class="layui-icon">&#xe615;</i> 删除附件
+					</a>
+				</blockquote>
+				<!-- 数据表格 -->
+				<table id="searchTable">
+					<tr>
+        	 	 <th w_check="true" w_index="id" width="3%;"></th> 
+			     <th w_index="id" w_sort="id" w_hidden="true"  width="5%;">ID</th>
+						<th w_index="name" w_render="fieldoperate" width="5%;">岗位名称</th>
+						<th w_index="type" width="5%;">岗位类型</th>
+						<th w_index="orgid"  width="5%;">所属组织</th>
+				        <th w_index="date"  width="5%;">创建时间</th>
+				        <th w_index="state"  w_render="fieldoperate"  width="5%;">状态</th>
+					</tr>
+				</table>
+			</fieldset>
+			</form>
+		</div>
+     
+  </div>
+		
+	</div>
+	
+	<div class="foot"
+		th:include="modules/base/contentTemplate::jsres(orgsyspost,syspost)"></div>
+	<!-- ztree扩展 -->
+	<script type="text/javascript"  th:src="@{/resource/plugins/ztree/js/jquery.ztree.all-3.5.min.js}"></script>
+	<script type="text/javascript"  th:src="@{/resource/plugins/ztree/js/jquery.ztree.exhide-3.5.min.js}"></script>
+	
+</body>
+
+</html>

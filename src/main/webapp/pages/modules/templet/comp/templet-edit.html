@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="modules/base/contentTemplate::cssres">
+<meta charset="UTF-8" />
+</head>
+<style type="text/css">
+.layui-form input[type=checkbox] {
+	display: inline-block;
+	margin: 0 auto;
+}
+.a-upload {
+    padding: 4px 10px;
+    height: 25px;
+    line-height: 25px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1
+}
+.a-upload  input {
+    position: absolute;
+    font-size: 25px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer
+}
+.a-upload:hover {
+    color: #444;
+    background: #eee;
+    border-color: #ccc;
+    text-decoration: none
+}
+</style>
+<body  >
+	<div style="margin: 15px;">
+	<form class="layui-form" id="systemres" action="">
+	<div class="layui-tab  layui-tab-brief"  lay-filter="fromtab">
+		<ul class="layui-tab-title">
+			<li class="layui-this">模板信息</li>
+			<!-- <li>系统资源</li> -->
+			<li>系统角色</li>
+		</ul>
+		<div class="layui-tab-content">
+		  	<!-- tab1 -->
+		  	<input type="hidden" name="id" th:value="${Templet[id]}"/>
+		    <div class="layui-tab-item layui-show">
+			<div class="layui-form-item">
+				<!-- <input type="hidden" name="id"/> -->
+				<label class="layui-form-label">报表名称</label>
+				<div class="layui-input-block">
+					<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" th:value="${Templet[name]}"/>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<!-- <input type="hidden" name="id"/> -->
+				<label class="layui-form-label">报表状态</label>
+				<div class="layui-input-block">
+					<input type="text" name="status" lay-verify="required" autocomplete="off" class="layui-input" th:value="${Templet[status]}"/>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<!-- <input type="hidden" name="id"/> -->
+				<label class="layui-form-label">报表模式</label>
+				<div class="layui-input-block">
+					<input type="text" name="mode" lay-verify="required" autocomplete="off" class="layui-input" th:value="${Templet[mode]}"/>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<!-- <input type="hidden" name="id"/> -->
+				<label class="layui-form-label">SQL语句</label>
+				<div class="layui-input-block">
+					<input type="text" name="sql_sentence" autocomplete="off" class="layui-input" th:value="${Templet[sql_sentence]}"/>
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">SQL参数</label>
+				<div class="layui-input-block">
+					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">Jrxml文件</label>
+				<div class="layui-input-block">
+					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">Jasper文件</label>
+				<div class="layui-input-block">
+					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">Jrxml文件</label>
+				<div class="layui-input-block">
+					<!-- <input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/> -->
+					<a href="javascript:;" class="a-upload"><input type="file" name="" id="jrxml"/>点击这里上传文件</a>
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">Jasper文件</label>
+				<div class="layui-input-block">
+					<!-- <input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/> -->
+					<a href="javascript:;" class="a-upload"><input type="file" />点击这里上传文件</a>
+				</div>
+			</div>
+			</div>
+			<!-- end tab1 -->
+		  
+		  <!-- tab2 -->
+		    <!-- <div class="layui-tab-item">
+				 <div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">验证数字</label>
+					<div class="layui-input-inline">
+						<input type="number" name="number" lay-verify="number" autocomplete="off" class="layui-input"/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">验证日期</label>
+					<div class="layui-input-block">
+						<input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})"/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">验证链接</label>
+					<div class="layui-input-block">
+						<input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input"/>
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">验证身份证</label>
+				<div class="layui-input-block">
+					<input type="text" name="identity" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input"/>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">自定义验证</label>
+				<div class="layui-input-inline">
+					<input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input"/>
+				</div>
+				<div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">编辑器</label>
+				<div class="layui-input-block">
+					<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
+				</div>
+			</div> 
+			
+			</div> -->
+		  <!-- end tab2 -->
+		  
+		  <!-- tab3 -->
+		    <div class="layui-tab-item">
+		    	附件信息
+		  	</div>
+		  <!-- end tab3 -->
+		  </div>
+		</div>
+	</form>	
+	</div>
+	<script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/plugins/jquery-1.4.4.min.js}"></script>
+	<!-- <script type="text/javascript" th:src="@{/resource/plugins/layui/layui.js}"></script> -->
+	<script type="text/javascript" th:src="@{/resource/js/fileupload/Eajaxfileupload.js}"></script>
+
+	<script>
+		/* layui.use(['form', 'layedit', 'laydate','element'], function() {
+			var form = layui.form(),
+				layer = layui.layer,
+				layedit = layui.layedit,
+				laydate = layui.laydate;
+			var element = layui.element();
+			$ = layui.jquery;
+			
+			  element.on('tab(fromtab)', function(data){
+			    console.log(data);
+			  });
+			//创建一个编辑器
+			var editIndex = layedit.build('LAY_demo_editor');
+		}); */
+		function getfromdata(){
+			return $('#systemres').serializeArray();
+		}
+		//var upload=$(".aupload");
+		$(".a-upload").bind("change","input[type='file']",function(){
+			debugger;
+		    var filePath=$(this).val();
+		    $.ajaxFileUpload({
+               	url:"templet/uploadfile.do",
+               	secureuri:false,
+               	fileElementId:"jrxml",
+              	dataType: 'json',
+               	success:function(data){
+               		if(data.success){
+               		};
+                },
+                error: function (){  
+					console.info('上传失败:未知异常!');  
+               	}
+			});
+		    if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1){
+		        $(".fileerrorTip").html("").hide();
+		        var arr=filePath.split('\\');
+		        var fileName=arr[arr.length-1];
+		        $(".showFileName").html(fileName);
+		    }else{
+		        $(".showFileName").html("");
+		        $(".fileerrorTip").html("您未上传文件，或者您上传文件类型有误！").show();
+		        return false 
+		    }
+		})
+	</script>
+</body>
+
+</html>

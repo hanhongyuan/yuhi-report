@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="modules/base/contentTemplate::cssres">
+ <link rel="stylesheet" th:href="@{/resource/plugins/layui/css/layui.css}" media="all" />
+	
+<meta charset="UTF-8" />
+</head>
+<style type="text/css">
+.layui-form input[type=checkbox] {
+	display: inline-block;
+	margin: 0 auto;
+}
+</style>
+<body>
+	<div class="admin-main">
+
+		<div class="site-demo">
+
+			<form id="orgForm" class="layui-form layui-form-pane" method="get">
+				<!-- 数据表格 -->
+				<fieldset class="layui-elem-field hresult-5">
+					<legend>权限管理</legend>
+					<!-- 搜索查询框  -->
+					<blockquote class="layui-elem-quote">
+						<div class="layui-inline">
+							<label class="layui-form-label">选择应用</label>
+							<div class="layui-input-inline">
+								<select  name="systemcode" style="display: block;"
+									class="selectpanel">
+									<option value="">全部</option>
+									<option  th:each="system,systemStat : ${systemlist}"
+									 th:value="${system.sysCode}" th:text="${system.sysName}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">选择类型</label>
+							<div class="layui-input-inline">
+								<select  name="typecode" style="display: block;"
+									class="selectpanel">
+									<option value="menu">菜单权限</option>
+									<option value="permission">操作权限</option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">查询选项</label>
+							<div class="layui-input-inline">
+								<select name="serachfiled" style="display: block;"
+									class="selectpanel">
+									<option value="name">岗位名称</option>
+									<option value="type">岗位类型</option>
+									<option value="orgid">所属组织</option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<div class="layui-input-inline">
+								<input type="text" name="keyword" value="" placeholder="请输入关键词"
+									class="layui-input" />
+							</div>
+						</div>
+						<div class="layui-inline">
+							<button class="layui-btn" type="button" id="search"
+								onclick="searchobj()">搜索</button>
+						</div>
+					</blockquote>
+					<!-- 操作区 -->
+					<blockquote class="layui-elem-quote layui-quote-nm">
+						<a href="javascript:;" class="layui-btn layui-btn-small" id="add"
+							onclick="addobj()"> <i class="layui-icon">&#xe608;</i> 新增角色
+						</a> <a href="javascript:;" class="layui-btn layui-btn-small"
+							onclick="menupermission()" id="update"> <i class="layui-icon">&#xe608;</i>
+							菜单权限
+						</a> <a href="javascript:;" class="layui-btn layui-btn-small"
+							onclick="deleteObj()" id="delete"> <i class="layui-icon">&#xe608;</i>
+							操作权限
+						</a> <a href="#" class="layui-btn layui-btn-small" id="import"> <i
+							class="layui-icon">&#xe608;</i> 更改权限
+						</a> <a href="#" class="layui-btn layui-btn-small" id="export"> <i
+							class="layui-icon" aria-hidden="true">&#xe608;</i> 删除
+						</a>
+					</blockquote>
+					<!-- 参数 -->
+					<table id="searchTable">
+						<tr>
+							<th w_check="true" w_index="id" width="3%;"></th>
+							<th w_index="id" w_hidden="true" width="5%;">ID</th>
+							<th w_index="name"  w_sort="name" width="5%;">报表名称</th>
+							<th w_index="mode"  w_render="fieldoperate" width="5%;">报表模式</th>
+							<th w_index="sql_sentence" width="5%;">SQL语句</th>
+							<th w_index="params" width="5%;">SQL参数</th>
+							<th w_index="version" width="5%;">版本号</th>
+							<th w_index="status" w_render="fieldoperate" width="5%;">状态</th>
+						</tr>
+					</table>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div class="foot"
+		th:include="modules/base/contentTemplate::jsres(datasource,datasource)"></div>
+	<!-- ztree扩展 -->
+	<script type="text/javascript"
+		th:src="@{/resource/plugins/ztree/js/jquery.ztree.all-3.5.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/resource/plugins/ztree/js/jquery.ztree.exhide-3.5.min.js}"></script>
+
+</body>
+
+</html>
