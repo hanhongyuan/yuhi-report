@@ -83,7 +83,7 @@
 			        			if(data){
 			        				parent.layer.msg("编辑成功！")
 			        				parent.layer.close(boxindex);
-//			        				refreshgrid();
+//			        				//refreshgrid();
 			        				gridObj.refreshPage();
 			        			}else{
 			        				parent.layer.msg("系统错误，请稍后重试！")

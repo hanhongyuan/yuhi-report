@@ -50,7 +50,8 @@
 		</ul>
 		<div class="layui-tab-content">
 		  	<!-- tab1 -->
-		  	<input type="hidden" name="id" th:value="${Templet[id]}"/>
+		  	<input id="id" type="hidden" name="id" th:value="${Templet[id]}"/>
+		  	<input id="version" type="hidden" name="version" th:value="${Templet[version]}"/>
 		    <div class="layui-tab-item layui-show">
 			<div class="layui-form-item">
 				<!-- <input type="hidden" name="id"/> -->
@@ -89,27 +90,27 @@
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">Jrxml文件</label>
 				<div class="layui-input-block">
-					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
+					<input id="jrxmlurl" type="text" name="jrxmlurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">Jasper文件</label>
 				<div class="layui-input-block">
-					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
+					<input id="jasperurl" type="text" name="jasperurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">Jrxml文件</label>
 				<div class="layui-input-block">
 					<!-- <input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/> -->
-					<a href="javascript:;" class="a-upload"><input type="file" name="" id="jrxml"/>点击这里上传文件</a>
+					<a href="javascript:;" class="a-upload"><input type="file" name="jrxml" id="jrxml"/>点击这里上传文件1</a>
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">Jasper文件</label>
 				<div class="layui-input-block">
 					<!-- <input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/> -->
-					<a href="javascript:;" class="a-upload"><input type="file" />点击这里上传文件</a>
+					<a href="javascript:;" class="a-upload"><input type="file" name="jasper" id="jasper"/>点击这里上传文件2</a>
 				</div>
 			</div>
 			</div>
@@ -168,47 +169,54 @@
 		  </div>
 		</div>
 	</form>	
+	<!-- <input type="file" name="aa" id="aa"/><button onclick="upload('aa')">上传</button> -->
 	</div>
 	<script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/plugins/jquery-1.4.4.min.js}"></script>
-	<!-- <script type="text/javascript" th:src="@{/resource/plugins/layui/layui.js}"></script> -->
+	<script type="text/javascript" th:src="@{/resource/plugins/layui/layui.js}"></script>
 	<script type="text/javascript" th:src="@{/resource/js/fileupload/Eajaxfileupload.js}"></script>
 
 	<script>
-		/* layui.use(['form', 'layedit', 'laydate','element'], function() {
+		layui.use(['form', 'layedit', 'laydate','element'], function() {
 			var form = layui.form(),
 				layer = layui.layer,
 				layedit = layui.layedit,
 				laydate = layui.laydate;
 			var element = layui.element();
-			$ = layui.jquery;
 			
-			  element.on('tab(fromtab)', function(data){
-			    console.log(data);
-			  });
+			element.on('tab(fromtab)', function(data){
+				console.log(data);
+			});
 			//创建一个编辑器
 			var editIndex = layedit.build('LAY_demo_editor');
-		}); */
+		});
 		function getfromdata(){
 			return $('#systemres').serializeArray();
 		}
-		//var upload=$(".aupload");
-		$(".a-upload").bind("change","input[type='file']",function(){
+		$(".a-upload").bind("change",function(){
 			debugger;
-		    var filePath=$(this).val();
+			//var file = event.target;
+			var id = event.target.id;
 		    $.ajaxFileUpload({
                	url:"templet/uploadfile.do",
                	secureuri:false,
-               	fileElementId:"jrxml",
+               	fileElementId:id,
               	dataType: 'json',
+              	type:'post',
+              	data:{
+              		type:id,
+              		id:document.getElementById('id').value,
+              		version:document.getElementById('version').value==""?1:document.getElementById('version').value
+              	},
                	success:function(data){
                		if(data.success){
+               			$("#"+id+"url").val(data.url);
                		};
                 },
                 error: function (){  
 					console.info('上传失败:未知异常!');  
                	}
 			});
-		    if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1){
+		    /* if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1){
 		        $(".fileerrorTip").html("").hide();
 		        var arr=filePath.split('\\');
 		        var fileName=arr[arr.length-1];
@@ -217,8 +225,42 @@
 		        $(".showFileName").html("");
 		        $(".fileerrorTip").html("您未上传文件，或者您上传文件类型有误！").show();
 		        return false 
-		    }
+		    } */
 		})
+		/* function upload(id){
+			debugger;
+			var name = document.getElementById(id).value.substring(document.getElementById(id).value.lastIndexOf("."));
+			if(name==""){
+				alert("请选择文件!");
+				return;
+			} else if(name.substring(name.lastIndexOf("."))!="."+id){
+				alert("请选择后缀名为"+id+"的文件!");
+				return;
+			}
+			$.ajaxFileUpload({
+               	url:"templet/uploadfile.do",
+               	type:'post',
+               	data:{
+               		type:'aa',
+               		version:'1'
+               	},
+               	secureuri:false,
+               	fileElementId:id,
+              	dataType: 'json',
+               	success:function(data){
+               		if(data.success){
+               			var a = document.getElementsByName(id+'url');
+               			$("#"+id+"url").textbox('setValue',data.url);
+               			$("#"+id+"_td").html('<p>上传成功!</p>');
+               			//版本更新标记
+               			version_flag=1;
+               		};
+                },
+                error: function (){  
+					console.info('上传失败:未知异常!');  
+               	}
+			}); 
+		} */
 	</script>
 </body>
 
