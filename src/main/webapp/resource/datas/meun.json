@@ -1,0 +1,43 @@
+[
+	{
+        "id": 1000,
+        "name": "后台管理",
+        "type": "menu",
+        "url": "",
+        "percode": "sys",
+        "parentid": 1,
+        "parentids": null,
+        "sortstring": null,
+        "available": "1",
+        "icon": "fa-cogs",
+        "systemid": null,
+        "chirdmenus": [
+            {
+                "id": 1001,
+                "name": "模板管理",
+                "type": "menu",
+                "url": "templet.do?go",
+                "percode": "api:query",
+                "parentid": 1000,
+                "parentids": null,
+                "sortstring": null,
+                "available": "1",
+                "icon": "fa-table",
+                "systemid": "admin"
+            },
+            {
+                "id": 1002,
+                "name": "数据源管理",
+                "type": "menu",
+                "url": "datasource/go.do",
+                "percode": "syslog:query",
+                "parentid": 1000,
+                "parentids": null,
+                "sortstring": null,
+                "available": "1",
+                "icon": "fa-table",
+                "systemid": "admin"
+            }
+        ]
+    }
+]
