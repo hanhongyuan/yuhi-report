@@ -3,8 +3,6 @@ package com.yuhi.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -22,11 +20,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.yuhi.common.AjaxJson;
 import com.yuhi.common.MapData;
 import com.yuhi.common.PropertiesUtil;
 import com.yuhi.common.Constants;
-import com.yuhi.entity.Data;
 import com.yuhi.service.AssemblyReportService;
 import com.yuhi.service.DataService;
 import com.yuhi.service.TemplateService;
