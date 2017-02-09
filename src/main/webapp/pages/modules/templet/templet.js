@@ -16,8 +16,7 @@
                 event: {
                     customRowEvents: {
                         click: function (record, rowIndex, trObj, options) {
-                        		trObj[0].children[0].children[0].checked=!trObj[0].children[0].children[0].checked;
-//                        		角色联动
+                        	trObj[0].children[0].children[0].checked=!trObj[0].children[0].children[0].checked; //角色联动
                         }
                     }
                 }
@@ -25,7 +24,7 @@
            
         });
       
-		/**数据表格**/
+		//数据表格
 		function fieldoperate(record, rowIndex, colIndex, options) {
         	switch (colIndex) {
         	case 3:
@@ -71,7 +70,6 @@
 					content: 'templet.do?goEdit&id='+obj.id,
 					area: ['800px', '500px'],
 					yes: function(index,layero){
-						debugger;
 						var iframeWin = parent.window[layero.find('iframe')[0]['name']];
 						var data=iframeWin.getfromdata();
 						//表单联动
@@ -83,7 +81,8 @@
 			        			if(data){
 			        				parent.layer.msg("编辑成功！")
 			        				parent.layer.close(boxindex);
-//			        				//refreshgrid();
+//			        				refreshgrid();
+			        				gridObj.refreshPage();
 			        				gridObj.refreshPage();
 			        			}else{
 			        				parent.layer.msg("系统错误，请稍后重试！")
@@ -130,7 +129,8 @@
 		        			if(data){
 		        				parent.layer.msg("编辑成功！")
 		        				parent.layer.close(boxindex);
-		        				refreshgrid();
+		        				gridObj.refreshPage();
+		        				gridObj.refreshPage();
 		        			}else{
 		        				parent.layer.msg("系统错误，请稍后重试！")
 		        			}
@@ -138,6 +138,23 @@
 		        	});
 				}
 			});
+		}
+		//查询历史版本
+		function history(){
+			var index=gridObj.getSelectedRowIndex();
+			if(index!=-1){
+				var obj= gridObj.getRecord(index);
+				boxindex = parent.layer.open({
+					/*btn: ['提交','取消'],*/
+					title: '历史版本查询',
+					maxmin: true,
+					type: 2,
+					content: 'templet.do?goHistory&id='+obj.id,
+					area: ['800px', '500px'],
+				});
+			}else{
+				parent.layer.alert("请选择一条数据！");
+			}
 		}
 		
 		/**其他**/
@@ -150,7 +167,7 @@
 //				layer = layui.layer,
 //				layedit = layui.layedit,
 //				laydate = layui.laydate;
-			//创建一个编辑器
+//			创建一个编辑器
 //			layui.upload({
 //				url:'',
 //				elem: '#test',

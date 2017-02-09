@@ -1,0 +1,117 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="modules/base/contentTemplate::cssres">
+<meta charset="UTF-8" />
+</head>
+<style type="text/css">
+.layui-form input[type=checkbox] {
+	display: inline-block;
+	margin: 0 auto;
+}
+</style>
+<body>
+	<div style="margin: 2px;">
+	<!-- <form class="layui-form" id="systemres" action="">
+	<div class="layui-tab  layui-tab-brief"  lay-filter="fromtab">
+		<ul class="layui-tab-title">
+			<li class="layui-this">历史版本列表</li>
+			<li>系统资源</li>
+			<li>模板文件</li>
+		</ul>
+		<div class="layui-tab-content">
+		  tab3
+            <div class="layui-tab-item">
+	    	  <table class="layui-table">
+			  </table>
+		  	</div>
+		  end tab3
+		  </div>
+		</div>
+	</form> -->
+	<form hidden="ture">
+		<input id ="template_id" th:value="${Templet[id]}"/>
+	</form>
+	<table id="versionTable" class="layui-table">
+	  <thead>
+		<th w_index="id" w_hidden="true" width="5%;">ID</th>
+		<th w_index="templet_id" w_hidden="true" width="5%;">TEMPLET_ID</th>
+		<th w_index="version" width="5%;">版本号</th>
+		<th w_index="status" w_render="fieldoperate" width="5%;">状态</th>
+		<th w_index="create_user" width="5%;">创建人</th>
+		<th w_index="create_time" width="5%;">创建时间</th>
+		<th w_render="fieldoperate" width="5%;">操作</th>
+		<th w_index="jasper_url" w_hidden="true" width="5%;">JASPER_URL</th>
+		<th w_index="jrxml_url" w_hidden="true" width="5%;">JRXML_URL</th>
+	  </thead>
+	</table>
+	</div>
+	<script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/plugins/jquery-1.4.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/builds/js/lang/grid.zh-CN.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/builds/merged/bsgrid.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resource/plugins/layui/layui.js}"></script>
+	<script type="text/javascript" th:src="@{/pages/modules/templet/comp/templet-history.js}"></script>
+	<!-- <script>
+		var gridObj;
+		//var template_id = $('#template_id').val(); 
+		
+		$(function () {
+			var template_id = $('#template_id').val(); 
+	    	gridObj = $.fn.bsgrid.init('versionTable', {
+	            url: 'version/getDataByTemplateId.do?TemplateId='+template_id,
+	            // autoLoad: false,
+	            ajaxType: 'GET',
+	            stripeRows: true,
+	            pageSizeSelect: true,
+	            displayBlankRows: true,
+	           	multiSort: true, // multi column sort support, default false
+	            pageSize: 10,
+	            /* event: {
+	                customRowEvents: {
+	                    click: function (record, rowIndex, trObj, options) {
+	                    	trObj[0].children[0].children[0].checked=!trObj[0].children[0].children[0].checked; //角色联动
+	                    }
+	                } 
+	            } */
+	        });
+	    }); 
+		
+		function fieldoperate(record, rowIndex, colIndex, options) {
+			console.log(record.jasper_url);
+			var code = '<button class="layui-btn layui-btn-mini" onclick="download("'+record.jasper_url+
+					'")">下载jasper文件</button><button class="layui-btn layui-btn-mini" onclick="download("'+record.jrxml_url+
+					'")">下载jrxml文件</button>';
+			console.log(code);
+        	switch (colIndex) {
+        	case 3:
+				return record.status==0?'可用':'禁用';
+        	case 6:
+        		return code;
+			}
+        }
+		
+		function download(url){
+			$.post("templet/downloadfile.do",{url:url},function(){
+				
+			})
+		}
+		
+		layui.use(['form', 'layedit', 'laydate','element'], function() {
+			var form = layui.form(),
+				layer = layui.layer,
+				layedit = layui.layedit,
+				laydate = layui.laydate;
+			var element = layui.element();
+			
+			element.on('tab(fromtab)', function(data){
+				console.log(data);
+			});
+			//创建一个编辑器
+			var editIndex = layedit.build('LAY_demo_editor');
+		});
+		function getfromdata(){
+			return $('#systemres').serializeArray();
+		}
+	</script> -->
+</body>
+
+</html>

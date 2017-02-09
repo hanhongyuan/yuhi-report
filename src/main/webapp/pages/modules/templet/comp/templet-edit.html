@@ -46,12 +46,13 @@
 		<ul class="layui-tab-title">
 			<li class="layui-this">模板信息</li>
 			<!-- <li>系统资源</li> -->
-			<li>系统角色</li>
+			<li>模板文件</li>
 		</ul>
 		<div class="layui-tab-content">
 		  	<!-- tab1 -->
 		  	<input id="id" type="hidden" name="id" th:value="${Templet[id]}"/>
 		  	<input id="version" type="hidden" name="version" th:value="${Templet[version]}"/>
+		  	<input id="version_flag" type="hidden" name="version_flag" value="0"/>
 		    <div class="layui-tab-item layui-show">
 			<div class="layui-form-item">
 				<!-- <input type="hidden" name="id"/> -->
@@ -60,19 +61,38 @@
 					<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" th:value="${Templet[name]}"/>
 				</div>
 			</div>
-			<div class="layui-form-item">
-				<!-- <input type="hidden" name="id"/> -->
+			<!-- <div class="layui-form-item">
+				<input type="hidden" name="id"/>
 				<label class="layui-form-label">报表状态</label>
 				<div class="layui-input-block">
 					<input type="text" name="status" lay-verify="required" autocomplete="off" class="layui-input" th:value="${Templet[status]}"/>
 				</div>
-			</div>
+				<div class="layui-input-inline">
+			      <select name="status">
+			        <option value="">请选择</option>
+			        <option value="浙江" selected="">浙江省</option>
+			        <option value="你的工号">江西省</option>
+			        <option value="你最喜欢的老师">福建省</option>
+			      </select>
+			    </div>
+			</div> -->
 			<div class="layui-form-item">
 				<!-- <input type="hidden" name="id"/> -->
 				<label class="layui-form-label">报表模式</label>
-				<div class="layui-input-block">
+				<!-- <div class="layui-input-block">
 					<input type="text" name="mode" lay-verify="required" autocomplete="off" class="layui-input" th:value="${Templet[mode]}"/>
-				</div>
+				</div> -->
+				<div class="layui-input-block">
+			      <select name="mode">
+			        <option value="">请选择模式</option>
+			        <option value="0" th:if="${Templet[mode]}==0" selected="selected">纯外部数据</option>
+			        <option value="0" th:unless="${Templet[mode]}==0">纯外部数据</option>
+			        <option value="1" th:if="${Templet[mode]}==1" selected="selected">纯数据源</option>
+			        <option value="1" th:unless="${Templet[mode]}==1">纯数据源</option>
+			        <option value="2" th:if="${Templet[mode]}==2" selected="selected">外部数据与数据源</option>
+			        <option value="2" th:unless="${Templet[mode]}==2">外部数据与数据源</option>
+			      </select>
+			    </div>
 			</div>
 			<div class="layui-form-item">
 				<!-- <input type="hidden" name="id"/> -->
@@ -87,32 +107,32 @@
 					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
 				</div>
 			</div>
-			<div class="layui-form-item layui-form-text">
+			<!-- <div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">Jrxml文件</label>
 				<div class="layui-input-block">
-					<input id="jrxmlurl" type="text" name="jrxmlurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
+					<input id="jrxmlurl" type="text" name="jrxmlurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[jrxmlurl]}"/>
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">Jasper文件</label>
 				<div class="layui-input-block">
-					<input id="jasperurl" type="text" name="jasperurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
+					<input id="jasperurl" type="text" name="jasperurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[jasperurl]}"/>
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">Jrxml文件</label>
 				<div class="layui-input-block">
-					<!-- <input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/> -->
+					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/>
 					<a href="javascript:;" class="a-upload"><input type="file" name="jrxml" id="jrxml"/>点击这里上传文件1</a>
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">Jasper文件</label>
 				<div class="layui-input-block">
-					<!-- <input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/> -->
+					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/>
 					<a href="javascript:;" class="a-upload"><input type="file" name="jasper" id="jasper"/>点击这里上传文件2</a>
 				</div>
-			</div>
+			</div> -->
 			</div>
 			<!-- end tab1 -->
 		  
@@ -163,13 +183,37 @@
 		  
 		  <!-- tab3 -->
 		    <div class="layui-tab-item">
-		    	附件信息
+	    	<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">Jrxml文件</label>
+			<div class="layui-input-block">
+				<input id="jrxmlurl" type="text" name="jrxmlurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[jrxmlurl]}"/>
+			</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">Jasper文件</label>
+				<div class="layui-input-block">
+					<input id="jasperurl" type="text" name="jasperurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[jasperurl]}"/>
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">Jrxml文件</label>
+				<div class="layui-input-block">
+					<!-- <input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/> -->
+					<a href="javascript:;" class="a-upload"><input type="file" name="jrxml" id="jrxml"/>点击这里上传文件1</a>
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">Jasper文件</label>
+				<div class="layui-input-block">
+					<!-- <input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/> -->
+					<a href="javascript:;" class="a-upload"><input type="file" name="jasper" id="jasper"/>点击这里上传文件2</a>
+				</div>
+			</div>
 		  	</div>
 		  <!-- end tab3 -->
 		  </div>
 		</div>
 	</form>	
-	<!-- <input type="file" name="aa" id="aa"/><button onclick="upload('aa')">上传</button> -->
 	</div>
 	<script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/plugins/jquery-1.4.4.min.js}"></script>
 	<script type="text/javascript" th:src="@{/resource/plugins/layui/layui.js}"></script>
@@ -193,9 +237,13 @@
 			return $('#systemres').serializeArray();
 		}
 		$(".a-upload").bind("change",function(){
-			debugger;
-			//var file = event.target;
 			var id = event.target.id;
+			var name = event.target.value;
+			var suffix = name.substring(name.lastIndexOf(".")+1);
+			if(suffix!=id){
+				layer.msg("请选择后缀名为"+id+"的文件", {icon: 6});
+				return;
+			}
 		    $.ajaxFileUpload({
                	url:"templet/uploadfile.do",
                	secureuri:false,
@@ -205,27 +253,18 @@
               	data:{
               		type:id,
               		id:document.getElementById('id').value,
-              		version:document.getElementById('version').value==""?1:document.getElementById('version').value
+              		version:document.getElementById('version').value==""?0:document.getElementById('version').value
               	},
                	success:function(data){
                		if(data.success){
                			$("#"+id+"url").val(data.url);
+               			$("#version_flag").val(1);
                		};
                 },
                 error: function (){  
 					console.info('上传失败:未知异常!');  
                	}
 			});
-		    /* if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1){
-		        $(".fileerrorTip").html("").hide();
-		        var arr=filePath.split('\\');
-		        var fileName=arr[arr.length-1];
-		        $(".showFileName").html(fileName);
-		    }else{
-		        $(".showFileName").html("");
-		        $(".fileerrorTip").html("您未上传文件，或者您上传文件类型有误！").show();
-		        return false 
-		    } */
 		})
 		/* function upload(id){
 			debugger;

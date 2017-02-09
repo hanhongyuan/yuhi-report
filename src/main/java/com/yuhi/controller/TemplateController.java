@@ -1,7 +1,10 @@
 package com.yuhi.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
@@ -11,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JRException;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +33,7 @@ import com.yuhi.common.Constants;
 import com.yuhi.service.AssemblyReportService;
 import com.yuhi.service.DataService;
 import com.yuhi.service.TemplateService;
+import com.yuhi.service.VersionService;
 
 @Controller
 @RequestMapping("/templet")
@@ -39,6 +47,9 @@ public class TemplateController {
 	
 	@Resource
 	private AssemblyReportService assemblyReportService;
+	
+	@Resource
+	private VersionService versionService;
 	
 	@RequestMapping(value = "/saveTemplet")
 	@ResponseBody
@@ -84,7 +95,6 @@ public class TemplateController {
 	@RequestMapping(value = "/getData")
 	@ResponseBody
 	public JSONObject getData() {
-//		AjaxJson data = templateService.getEntityList();
 		JSONObject data = templateService.getEntityList();
 		return data;
 	}
@@ -99,20 +109,41 @@ public class TemplateController {
 		return "modules/templet/comp/templet-edit";
 	}
 	
-	@RequestMapping(value = "/goTestTemplet")
+	@RequestMapping(params = "goHistory")
+	public String goHistoryVersion(ModelMap map,String id){
+		if(id!=null){
+			map.put("Templet", templateService.getEntityById(id));
+		}else {
+			map.put("Templet",new JSONObject());
+		}
+		return "modules/templet/comp/templet-history";
+	}
+	
+	/*@RequestMapping(value = "/goTestTemplet")
 	public String goTestTemplet(){
 		return "views/templet/test-templet";
-	}
+	}*/
 	
 	@RequestMapping(value = "/editTemplet")
 	@ResponseBody
 	public int editTemplet(HttpServletRequest req){
-//		MapData md=new MapData(req);
 		JSONObject templet = new JSONObject(new MapData(req));
+		if(templet.getInteger("version_flag")==1){
+			//添加version历史记录
+			JSONObject version = new JSONObject();
+			version.put("templet_id", templet.get("id"));
+			version.put("version", templet.get("version"));
+			version.put("jasper_url", templet.get("jasperurl"));
+			version.put("jrxml_url", templet.get("jrxmlurl"));
+			
+			versionService.insertEntity(version);
+			
+			templet.put("version", templet.getInteger("version")+1);
+		}
+		templet.remove("version_flag");
 		if(templet.getInteger("id")!=null){
 			return templateService.updateEntity(templet);
 		}else {
-//			templet.remove("id");
 			return templateService.insertEntity(templet);
 		}
 	}
@@ -159,5 +190,61 @@ public class TemplateController {
 			flag = 1;
 		}
 		return flag;
+	}
+	
+	/*@RequestMapping(value="/downloadfile")
+//	@ResponseBody
+	public void downloadfile(String url,HttpServletResponse response){
+		String path = "G:\\apache-tomcat-7.0.57-windows-x64\\apache-tomcat-7.0.57\\webapps\\file"+url;
+		File file = new File(path);
+		String filename = file.getName();
+		
+//		response.reset();
+		response.addHeader("Conteawnt-Disposition", "attachment;filename=a.pdf");
+//		response.addHeader("Content-Length", ""+file.length());
+		response.setContentType("application/octet-stream");
+		
+		try {
+//			InputStream fis = new BufferedInputStream(new FileInputStream(path));
+//			byte[] buffer = new byte[fis.available()];
+//			fis.read(buffer);
+//			fis.close();
+//			OutputStream out = new BufferedOutputStream(response.getOutputStream());
+//			out.write(buffer);
+//			out.flush();
+//			out.close();
+			FileInputStream inputStream = new FileInputStream(file);
+			ServletOutputStream out = response.getOutputStream();
+			int b = 0;
+			byte[] buffer = new byte[512];
+			while (b != -1){
+				b = inputStream.read();
+				if(b==-1)break;
+				out.write(buffer, 0, b);
+			}
+			inputStream.close();
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
+	@RequestMapping(value = "/downloadfile",produces = {"application/vnd.ms-excel;charset=UTF-8"})
+	public ResponseEntity<byte[]> downLoad(HttpServletRequest request,String url) throws Exception {
+		String path = "G:\\apache-tomcat-7.0.57-windows-x64\\apache-tomcat-7.0.57\\webapps\\file"+url;
+		File file = new File(path);
+		String filename = file.getName();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", filename);
+        
+        InputStream fis = new BufferedInputStream(new FileInputStream(path));
+		byte[] buffer = new byte[fis.available()];
+		fis.read(buffer);
+		fis.close();
+        
+//	  	byte[] byes=buffer;
+        return new ResponseEntity<byte[]>(buffer,headers, HttpStatus.CREATED);
 	}
 }

@@ -21,7 +21,8 @@ public class TemplateDao extends JdbcTemplatesDao {
 	}
 	
 	public List<JSONObject> findAll(){
-		return super.queryForJsonList("SELECT * FROM TEMPLET");
+//		return super.queryForJsonList("SELECT * FROM TEMPLET");
+		return super.queryForJsonListPage("SELECT * FROM TEMPLET", 1, 10);
 	}
 	
 	public JSONObject findOneById(String id){
