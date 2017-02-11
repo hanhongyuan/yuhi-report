@@ -128,23 +128,51 @@ public class TemplateController {
 	@ResponseBody
 	public int editTemplet(HttpServletRequest req){
 		JSONObject templet = new JSONObject(new MapData(req));
-		if(templet.getInteger("version_flag")==1){
-			//添加version历史记录
-			JSONObject version = new JSONObject();
-			version.put("templet_id", templet.get("id"));
-			version.put("version", templet.get("version"));
-			version.put("jasper_url", templet.get("jasperurl"));
-			version.put("jrxml_url", templet.get("jrxmlurl"));
-			
-			versionService.insertEntity(version);
-			
-			templet.put("version", templet.getInteger("version")+1);
-		}
-		templet.remove("version_flag");
+		JSONObject version = new JSONObject();
+//		if(templet.getInteger("version_flag")==1){
+//			//添加version历史记录
+//			JSONObject version = new JSONObject();
+//			version.put("templet_id", templet.get("id"));
+//			version.put("version", templet.get("version"));
+//			version.put("jasper_url", templet.get("jasperurl"));
+//			version.put("jrxml_url", templet.get("jrxmlurl"));
+//			
+//			versionService.insertEntity(version);
+//			if(templet.get("version")!=null){
+//				templet.put("version", templet.getInteger("version")+1);
+//			}
+//		}
+//		templet.remove("version_flag");
 		if(templet.getInteger("id")!=null){
+			if(templet.getInteger("version_flag")==1){
+				templet.remove("version_flag");
+				templet.put("version", templet.getInteger("version")+1);
+				
+				version.put("templet_id", templet.get("id"));
+				version.put("version", templet.get("version"));
+				version.put("jasper_url", templet.get("jasperurl"));
+				version.put("jrxml_url", templet.get("jrxmlurl"));
+				
+				versionService.insertEntity(version);
+			}
 			return templateService.updateEntity(templet);
 		}else {
-			return templateService.insertEntity(templet);
+			Integer id = null;
+			if(templet.getInteger("version_flag")==1){
+				templet.remove("version_flag");
+				id = templateService.insertEntity(templet);
+				
+				version.put("templet_id", id);
+				version.put("version", 1);
+				version.put("jasper_url", templet.get("jasperurl"));
+				version.put("jrxml_url", templet.get("jrxmlurl"));
+				
+				versionService.insertEntity(version);
+			}else{
+				templet.remove("version_flag");
+				id = templateService.insertEntity(templet);
+			}
+			return id;
 		}
 	}
 	

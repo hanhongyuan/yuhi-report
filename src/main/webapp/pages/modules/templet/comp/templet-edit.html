@@ -45,7 +45,6 @@
 	<div class="layui-tab  layui-tab-brief"  lay-filter="fromtab">
 		<ul class="layui-tab-title">
 			<li class="layui-this">模板信息</li>
-			<!-- <li>系统资源</li> -->
 			<li>模板文件</li>
 		</ul>
 		<div class="layui-tab-content">
@@ -61,27 +60,8 @@
 					<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" th:value="${Templet[name]}"/>
 				</div>
 			</div>
-			<!-- <div class="layui-form-item">
-				<input type="hidden" name="id"/>
-				<label class="layui-form-label">报表状态</label>
-				<div class="layui-input-block">
-					<input type="text" name="status" lay-verify="required" autocomplete="off" class="layui-input" th:value="${Templet[status]}"/>
-				</div>
-				<div class="layui-input-inline">
-			      <select name="status">
-			        <option value="">请选择</option>
-			        <option value="浙江" selected="">浙江省</option>
-			        <option value="你的工号">江西省</option>
-			        <option value="你最喜欢的老师">福建省</option>
-			      </select>
-			    </div>
-			</div> -->
 			<div class="layui-form-item">
-				<!-- <input type="hidden" name="id"/> -->
 				<label class="layui-form-label">报表模式</label>
-				<!-- <div class="layui-input-block">
-					<input type="text" name="mode" lay-verify="required" autocomplete="off" class="layui-input" th:value="${Templet[mode]}"/>
-				</div> -->
 				<div class="layui-input-block">
 			      <select name="mode">
 			        <option value="">请选择模式</option>
@@ -107,32 +87,6 @@
 					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}"/>
 				</div>
 			</div>
-			<!-- <div class="layui-form-item layui-form-text">
-				<label class="layui-form-label">Jrxml文件</label>
-				<div class="layui-input-block">
-					<input id="jrxmlurl" type="text" name="jrxmlurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[jrxmlurl]}"/>
-				</div>
-			</div>
-			<div class="layui-form-item layui-form-text">
-				<label class="layui-form-label">Jasper文件</label>
-				<div class="layui-input-block">
-					<input id="jasperurl" type="text" name="jasperurl" readonly="readonly" autocomplete="off" class="layui-input" th:value="${Templet[jasperurl]}"/>
-				</div>
-			</div>
-			<div class="layui-form-item layui-form-text">
-				<label class="layui-form-label">Jrxml文件</label>
-				<div class="layui-input-block">
-					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/>
-					<a href="javascript:;" class="a-upload"><input type="file" name="jrxml" id="jrxml"/>点击这里上传文件1</a>
-				</div>
-			</div>
-			<div class="layui-form-item layui-form-text">
-				<label class="layui-form-label">Jasper文件</label>
-				<div class="layui-input-block">
-					<input type="text" name="params" autocomplete="off" class="layui-input" th:value="${Templet[params]}" style="width: 60%;"/>
-					<a href="javascript:;" class="a-upload"><input type="file" name="jasper" id="jasper"/>点击这里上传文件2</a>
-				</div>
-			</div> -->
 			</div>
 			<!-- end tab1 -->
 		  
@@ -266,40 +220,6 @@
                	}
 			});
 		})
-		/* function upload(id){
-			debugger;
-			var name = document.getElementById(id).value.substring(document.getElementById(id).value.lastIndexOf("."));
-			if(name==""){
-				alert("请选择文件!");
-				return;
-			} else if(name.substring(name.lastIndexOf("."))!="."+id){
-				alert("请选择后缀名为"+id+"的文件!");
-				return;
-			}
-			$.ajaxFileUpload({
-               	url:"templet/uploadfile.do",
-               	type:'post',
-               	data:{
-               		type:'aa',
-               		version:'1'
-               	},
-               	secureuri:false,
-               	fileElementId:id,
-              	dataType: 'json',
-               	success:function(data){
-               		if(data.success){
-               			var a = document.getElementsByName(id+'url');
-               			$("#"+id+"url").textbox('setValue',data.url);
-               			$("#"+id+"_td").html('<p>上传成功!</p>');
-               			//版本更新标记
-               			version_flag=1;
-               		};
-                },
-                error: function (){  
-					console.info('上传失败:未知异常!');  
-               	}
-			}); 
-		} */
 	</script>
 </body>
 

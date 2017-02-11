@@ -81,7 +81,6 @@
 			        			if(data){
 			        				parent.layer.msg("编辑成功！")
 			        				parent.layer.close(boxindex);
-//			        				refreshgrid();
 			        				gridObj.refreshPage();
 			        				gridObj.refreshPage();
 			        			}else{
@@ -110,7 +109,7 @@
 		}
 		//添加
 		function addobj() {
-			parent.layer.open({
+			boxindex = parent.layer.open({
 				btn: ['提交','取消'],
 				title: '新增模板信息',
 				maxmin: true,
@@ -127,7 +126,7 @@
 		        		data:data,
 		        		success:function(data){
 		        			if(data){
-		        				parent.layer.msg("编辑成功！")
+		        				parent.layer.msg("新增成功成功！")
 		        				parent.layer.close(boxindex);
 		        				gridObj.refreshPage();
 		        				gridObj.refreshPage();
@@ -145,7 +144,6 @@
 			if(index!=-1){
 				var obj= gridObj.getRecord(index);
 				boxindex = parent.layer.open({
-					/*btn: ['提交','取消'],*/
 					title: '历史版本查询',
 					maxmin: true,
 					type: 2,

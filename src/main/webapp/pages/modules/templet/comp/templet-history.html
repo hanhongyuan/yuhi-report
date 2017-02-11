@@ -50,68 +50,6 @@
     <script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/builds/merged/bsgrid.all.min.js}"></script>
 	<script type="text/javascript" th:src="@{/resource/plugins/layui/layui.js}"></script>
 	<script type="text/javascript" th:src="@{/pages/modules/templet/comp/templet-history.js}"></script>
-	<!-- <script>
-		var gridObj;
-		//var template_id = $('#template_id').val(); 
-		
-		$(function () {
-			var template_id = $('#template_id').val(); 
-	    	gridObj = $.fn.bsgrid.init('versionTable', {
-	            url: 'version/getDataByTemplateId.do?TemplateId='+template_id,
-	            // autoLoad: false,
-	            ajaxType: 'GET',
-	            stripeRows: true,
-	            pageSizeSelect: true,
-	            displayBlankRows: true,
-	           	multiSort: true, // multi column sort support, default false
-	            pageSize: 10,
-	            /* event: {
-	                customRowEvents: {
-	                    click: function (record, rowIndex, trObj, options) {
-	                    	trObj[0].children[0].children[0].checked=!trObj[0].children[0].children[0].checked; //角色联动
-	                    }
-	                } 
-	            } */
-	        });
-	    }); 
-		
-		function fieldoperate(record, rowIndex, colIndex, options) {
-			console.log(record.jasper_url);
-			var code = '<button class="layui-btn layui-btn-mini" onclick="download("'+record.jasper_url+
-					'")">下载jasper文件</button><button class="layui-btn layui-btn-mini" onclick="download("'+record.jrxml_url+
-					'")">下载jrxml文件</button>';
-			console.log(code);
-        	switch (colIndex) {
-        	case 3:
-				return record.status==0?'可用':'禁用';
-        	case 6:
-        		return code;
-			}
-        }
-		
-		function download(url){
-			$.post("templet/downloadfile.do",{url:url},function(){
-				
-			})
-		}
-		
-		layui.use(['form', 'layedit', 'laydate','element'], function() {
-			var form = layui.form(),
-				layer = layui.layer,
-				layedit = layui.layedit,
-				laydate = layui.laydate;
-			var element = layui.element();
-			
-			element.on('tab(fromtab)', function(data){
-				console.log(data);
-			});
-			//创建一个编辑器
-			var editIndex = layedit.build('LAY_demo_editor');
-		});
-		function getfromdata(){
-			return $('#systemres').serializeArray();
-		}
-	</script> -->
 </body>
 
 </html>

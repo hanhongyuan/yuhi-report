@@ -12,7 +12,7 @@ import com.yuhi.common.BaseTools;
 public class TemplateDao extends JdbcTemplatesDao {
 	
 	public Integer save(JSONObject jsonObject) {
-		return super.insert(jsonObject);
+		return super.insertOrReturnId(jsonObject);
 	}
 	
 	public Integer update(JSONObject jsonObject) {
