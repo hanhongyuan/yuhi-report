@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yuhi.common.Constants;
 import com.yuhi.dao.VersionDao;
 import com.yuhi.service.VersionService;
 
@@ -33,7 +34,7 @@ public class VersionServiceImpl implements VersionService{
 
 	@Override
 	public Integer insertEntity(JSONObject jsonObject) {
-		jsonObject.put("status", 0);
+		jsonObject.put("status", Constants.STATUS_ENABLE);
 		jsonObject.put("create_time", new Date());
 		int flag = dao.save(jsonObject);
 		return flag;
