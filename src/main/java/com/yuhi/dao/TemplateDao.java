@@ -16,7 +16,7 @@ public class TemplateDao extends JdbcTemplatesDao {
 	}
 	
 	public Integer update(JSONObject jsonObject) {
-		super.update(BaseTools.JsonToMap(jsonObject), jsonObject.getString("id"));
+		super.update(jsonObject, jsonObject.getString("id"));
 		return jsonObject.getInteger("id");
 	}
 	

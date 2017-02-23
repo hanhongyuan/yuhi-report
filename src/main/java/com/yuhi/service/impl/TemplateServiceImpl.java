@@ -1,12 +1,13 @@
 package com.yuhi.service.impl;
 
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yuhi.common.AjaxJson;
+import com.yuhi.common.Constants;
 import com.yuhi.dao.TemplateDao;
 import com.yuhi.service.TemplateService;
 
@@ -35,6 +36,8 @@ public class TemplateServiceImpl implements TemplateService {
 
 	@Override
 	public Integer insertEntity(JSONObject jsonObject) {
+		jsonObject.put("create_time", new Date());
+		jsonObject.put("status", Constants.STATUS_ENABLE);
 		jsonObject.put("code", UUID.randomUUID().toString());
 		jsonObject.put("version",1);
 		int flag = dao.save(jsonObject);
@@ -43,6 +46,7 @@ public class TemplateServiceImpl implements TemplateService {
 
 	@Override
 	public Integer updateEntity(JSONObject jsonObject) {
+//		jsonObject.put("update_time", new Date());
 		int flag = dao.update(jsonObject);
 		return flag;
 	}

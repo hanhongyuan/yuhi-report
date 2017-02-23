@@ -15,4 +15,8 @@ public interface Constants {
 	/** 状态类型表 */
 	public static final int STATUS_ENABLE = 0;
 	public static final int STATUS_DISABLE = 1;
+	
+	/** 参数类型表*/
+	public static final int TYPE_PARAM = 0;
+	public static final int TYPE_FIELD = 1;
 }

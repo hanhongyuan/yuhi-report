@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,6 +35,7 @@ import com.yuhi.common.PropertiesUtil;
 import com.yuhi.common.Constants;
 import com.yuhi.service.AssemblyReportService;
 import com.yuhi.service.DataService;
+import com.yuhi.service.ParamsService;
 import com.yuhi.service.TemplateService;
 import com.yuhi.service.VersionService;
 
@@ -50,6 +54,9 @@ public class TemplateController {
 	
 	@Resource
 	private VersionService versionService;
+	
+	@Resource
+	private ParamsService paramsService;
 	
 	@RequestMapping(value = "/saveTemplet")
 	@ResponseBody
@@ -119,61 +126,52 @@ public class TemplateController {
 		return "modules/templet/comp/templet-history";
 	}
 	
-	/*@RequestMapping(value = "/goTestTemplet")
-	public String goTestTemplet(){
-		return "views/templet/test-templet";
-	}*/
+	@RequestMapping(params = "goParams")
+	public String goParams(ModelMap map,String id){
+		if(id!=null){
+			map.put("Templet", templateService.getEntityById(id));
+		}else {
+			map.put("Templet",new JSONObject());
+		}
+		return "modules/templet/comp/templet-params";
+	}
 	
 	@RequestMapping(value = "/editTemplet")
 	@ResponseBody
 	public int editTemplet(HttpServletRequest req){
 		JSONObject templet = new JSONObject(new MapData(req));
 		JSONObject version = new JSONObject();
-//		if(templet.getInteger("version_flag")==1){
-//			//添加version历史记录
-//			JSONObject version = new JSONObject();
-//			version.put("templet_id", templet.get("id"));
-//			version.put("version", templet.get("version"));
-//			version.put("jasper_url", templet.get("jasperurl"));
-//			version.put("jrxml_url", templet.get("jrxmlurl"));
-//			
-//			versionService.insertEntity(version);
-//			if(templet.get("version")!=null){
-//				templet.put("version", templet.getInteger("version")+1);
-//			}
-//		}
-//		templet.remove("version_flag");
+		Integer id = null;
+		Integer versionFlag = templet.getInteger("version_flag");
+		templet.remove("version_flag");
+		
 		if(templet.getInteger("id")!=null){
-			if(templet.getInteger("version_flag")==1){
-				templet.remove("version_flag");
+			if(versionFlag==1){
 				templet.put("version", templet.getInteger("version")+1);
-				
+				//历史版本
 				version.put("templet_id", templet.get("id"));
 				version.put("version", templet.get("version"));
 				version.put("jasper_url", templet.get("jasperurl"));
 				version.put("jrxml_url", templet.get("jrxmlurl"));
-				
 				versionService.insertEntity(version);
 			}
-			return templateService.updateEntity(templet);
+			id = templateService.updateEntity(templet);
 		}else {
-			Integer id = null;
-			if(templet.getInteger("version_flag")==1){
-				templet.remove("version_flag");
-				id = templateService.insertEntity(templet);
-				
+			id = templateService.insertEntity(templet);
+			if(versionFlag==1){
+				templet.put("id", id);
+				//历史版本
 				version.put("templet_id", id);
 				version.put("version", 1);
 				version.put("jasper_url", templet.get("jasperurl"));
 				version.put("jrxml_url", templet.get("jrxmlurl"));
-				
 				versionService.insertEntity(version);
-			}else{
-				templet.remove("version_flag");
-				id = templateService.insertEntity(templet);
+				
+				File file = new File("G:/apache-tomcat-7.0.57-windows-x64/apache-tomcat-7.0.57/webapps/file"+templet.get("jasperurl"));
+				paramsService.insertListByFile(file, templet);
 			}
-			return id;
 		}
+		return id;
 	}
 	
 	@RequestMapping(value = "/uploadfile")
@@ -220,43 +218,6 @@ public class TemplateController {
 		return flag;
 	}
 	
-	/*@RequestMapping(value="/downloadfile")
-//	@ResponseBody
-	public void downloadfile(String url,HttpServletResponse response){
-		String path = "G:\\apache-tomcat-7.0.57-windows-x64\\apache-tomcat-7.0.57\\webapps\\file"+url;
-		File file = new File(path);
-		String filename = file.getName();
-		
-//		response.reset();
-		response.addHeader("Conteawnt-Disposition", "attachment;filename=a.pdf");
-//		response.addHeader("Content-Length", ""+file.length());
-		response.setContentType("application/octet-stream");
-		
-		try {
-//			InputStream fis = new BufferedInputStream(new FileInputStream(path));
-//			byte[] buffer = new byte[fis.available()];
-//			fis.read(buffer);
-//			fis.close();
-//			OutputStream out = new BufferedOutputStream(response.getOutputStream());
-//			out.write(buffer);
-//			out.flush();
-//			out.close();
-			FileInputStream inputStream = new FileInputStream(file);
-			ServletOutputStream out = response.getOutputStream();
-			int b = 0;
-			byte[] buffer = new byte[512];
-			while (b != -1){
-				b = inputStream.read();
-				if(b==-1)break;
-				out.write(buffer, 0, b);
-			}
-			inputStream.close();
-			out.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
 	@RequestMapping(value = "/downloadfile",produces = {"application/vnd.ms-excel;charset=UTF-8"})
 	public ResponseEntity<byte[]> downLoad(HttpServletRequest request,String url) throws Exception {
 		String path = "G:\\apache-tomcat-7.0.57-windows-x64\\apache-tomcat-7.0.57\\webapps\\file"+url;
@@ -272,7 +233,13 @@ public class TemplateController {
 		fis.read(buffer);
 		fis.close();
         
-//	  	byte[] byes=buffer;
         return new ResponseEntity<byte[]>(buffer,headers, HttpStatus.CREATED);
 	}
+	
+//	public void getParams() throws JRException {
+//		File sourceFile = new File("E:/template/dataAndSource.jasper");
+//		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(sourceFile);
+//		
+//		JRParameter[] param = jasperReport.getParameters();
+//	}
 }
