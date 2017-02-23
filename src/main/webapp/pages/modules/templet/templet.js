@@ -32,7 +32,7 @@
         		else if(record.mode==1)return '纯数据源参数';
         		else if(record.mode==2)return '外部参数混合数据源参数';
         	case 7:
-				return record.status==1?'可用':'禁用';
+				return record.status==1?'禁用':'可用';
 			}
         }	
 		//删除
@@ -126,7 +126,7 @@
 		        		data:data,
 		        		success:function(data){
 		        			if(data){
-		        				parent.layer.msg("新增成功成功！")
+		        				parent.layer.msg("新增成功！")
 		        				parent.layer.close(boxindex);
 		        				gridObj.refreshPage();
 		        				gridObj.refreshPage();
@@ -148,6 +148,22 @@
 					maxmin: true,
 					type: 2,
 					content: 'templet.do?goHistory&id='+obj.id,
+					area: ['800px', '500px'],
+				});
+			}else{
+				parent.layer.alert("请选择一条数据！");
+			}
+		}
+		
+		function params(){
+			var index=gridObj.getSelectedRowIndex();
+			if(index!=-1){
+				var obj= gridObj.getRecord(index);
+				boxindex = parent.layer.open({
+					title: '参数查询',
+					maxmin: true,
+					type: 2,
+					content: 'templet.do?goParams&id='+obj.id,
 					area: ['800px', '500px'],
 				});
 			}else{

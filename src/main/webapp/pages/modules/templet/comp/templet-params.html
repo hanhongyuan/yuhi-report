@@ -1,0 +1,38 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="modules/base/contentTemplate::cssres">
+<meta charset="UTF-8" />
+</head>
+<style type="text/css">
+.layui-form input[type=checkbox] {
+	display: inline-block;
+	margin: 0 auto;
+}
+</style>
+<body>
+	<div style="margin: 2px;">
+	<form hidden="ture">
+		<input id ="template_id" th:value="${Templet[id]}"/>
+		<input id ="template_version" th:value="${Templet[version]}"/>
+	</form>
+	<table id="versionTable" class="layui-table">
+	  <thead>
+		<th w_index="id" w_hidden="true" width="5%;">ID</th>
+		<th w_index="templet_id" w_hidden="true" width="5%;">TEMPLET_ID</th>
+		<th w_index="version" w_hidden="true" width="5%;">版本号</th>
+		<th w_index="name" width="5%;">参数名称</th>
+		<th w_index="class" width="5%;">参数类型</th>
+		<th w_index="type" w_render="fieldoperate" width="5%;">种类</th>
+		<th w_index="status" w_render="fieldoperate" width="5%;">状态</th>
+		<th w_index="create_time" w_hidden="true" width="5%;">创建时间</th>
+	  </thead>
+	</table>
+	</div>
+	<script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/plugins/jquery-1.4.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/builds/js/lang/grid.zh-CN.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/builds/merged/bsgrid.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resource/plugins/layui/layui.js}"></script>
+	<script type="text/javascript" th:src="@{/pages/modules/templet/comp/templet-params.js}"></script>
+</body>
+
+</html>
