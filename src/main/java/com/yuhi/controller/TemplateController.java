@@ -6,17 +6,54 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.jasperreports.engine.JRConditionalStyle;
+import net.sf.jasperreports.engine.JRDataset;
+import net.sf.jasperreports.engine.JRDefaultStyleProvider;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JRLineBox;
+import net.sf.jasperreports.engine.JRParagraph;
 import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JRPen;
+import net.sf.jasperreports.engine.JRQuery;
+import net.sf.jasperreports.engine.JRStyle;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
+import net.sf.jasperreports.engine.export.JRXhtmlExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRPptxExporter;
+import net.sf.jasperreports.engine.type.FillEnum;
+import net.sf.jasperreports.engine.type.HorizontalAlignEnum;
+import net.sf.jasperreports.engine.type.LineSpacingEnum;
+import net.sf.jasperreports.engine.type.ModeEnum;
+import net.sf.jasperreports.engine.type.RotationEnum;
+import net.sf.jasperreports.engine.type.ScaleImageEnum;
+import net.sf.jasperreports.engine.type.VerticalAlignEnum;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.HtmlExporterConfiguration;
+import net.sf.jasperreports.export.HtmlReportConfiguration;
+import net.sf.jasperreports.export.SimpleExporterConfiguration;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleHtmlExporterConfiguration;
+import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
+import net.sf.jasperreports.export.SimpleHtmlReportConfiguration;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.type.HtmlSizeUnitEnum;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,14 +67,19 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.yuhi.common.BaseTools;
 import com.yuhi.common.MapData;
 import com.yuhi.common.PropertiesUtil;
 import com.yuhi.common.Constants;
+import com.yuhi.dao.DataDao;
 import com.yuhi.service.AssemblyReportService;
 import com.yuhi.service.DataService;
 import com.yuhi.service.ParamsService;
 import com.yuhi.service.TemplateService;
 import com.yuhi.service.VersionService;
+import com.yuhi.util.HtmlComponentApp;
+import com.yuhi.util.JasperHelper;
+import com.yuhi.util.JasperOutputUtil;
 
 @Controller
 @RequestMapping("/templet")
@@ -58,6 +100,9 @@ public class TemplateController {
 	@Resource
 	private ParamsService paramsService;
 	
+	@Autowired
+	private DataDao datadao;
+	
 	@RequestMapping(value = "/saveTemplet")
 	@ResponseBody
     public String saveTemplet(String data,HttpServletRequest request) throws JRException, UnsupportedEncodingException {
@@ -72,15 +117,15 @@ public class TemplateController {
 	}
 	
 	@RequestMapping(value = "/checkTemplet")
-	public String checkTemplet(ModelMap model,String id) throws JRException {
+	public void checkTemplet(ModelMap model,String id,HttpServletResponse response) throws JRException {
 		JSONObject data = dataService.getEntityById(id);
 		JSONObject templet = templateService.getEntityById(data.getString("template"));
 		switch (templet.getInteger("mode")){
-			case Constants.ASSEMBLY_DATA:assemblyReportService.AssemblyByData(model,data,templet);break;
-			case Constants.ASSEMBLY_SOURCE:assemblyReportService.AssemblyBySource(model,data,templet);break;
-			case Constants.ASSEMBLY_DATA_SOURCE:assemblyReportService.AssemblyByDataAndSource(model,data,templet);break;
+			case Constants.ASSEMBLY_DATA:assemblyReportService.AssemblyByData(model,data,templet,response);break;
+			case Constants.ASSEMBLY_SOURCE:assemblyReportService.AssemblyBySource(model,data,templet,response);break;
+			case Constants.ASSEMBLY_DATA_SOURCE:assemblyReportService.AssemblyByDataAndSource(model,data,templet,response);break;
 		}
-		return "iReportView";
+//		return "iReportView";
 	}
 	
 	@RequestMapping(value = "/loadTemplet")
@@ -90,7 +135,7 @@ public class TemplateController {
 		switch (templet.getInteger("mode")){
 			case Constants.ASSEMBLY_DATA:assemblyReportService.DownloadByData(data,templet, request, response);break;
 			case Constants.ASSEMBLY_SOURCE:assemblyReportService.DownLoadBySource(data,templet, request, response);break;
-			case Constants.ASSEMBLY_DATA_SOURCE:assemblyReportService.DownLoadBySource(data,templet, request, response);break;
+			case Constants.ASSEMBLY_DATA_SOURCE:assemblyReportService.DownLoadByDataAndSource(data,templet, request, response);break;
 		}
 	}
 	
@@ -136,6 +181,16 @@ public class TemplateController {
 		return "modules/templet/comp/templet-params";
 	}
 	
+	@RequestMapping(params = "goInvocation")
+	public String goInvocation(ModelMap map,String id){
+		if(id!=null){
+			map.put("Templet", templateService.getEntityById(id));
+		}else {
+			map.put("Templet",new JSONObject());
+		}
+		return "modules/templet/comp/templet-invocation";
+	}
+	
 	@RequestMapping(value = "/editTemplet")
 	@ResponseBody
 	public int editTemplet(HttpServletRequest req){
@@ -177,7 +232,7 @@ public class TemplateController {
 	@RequestMapping(value = "/uploadfile")
 	@ResponseBody
 	public String uploadfile(HttpServletRequest req,String type,String id,Integer version) throws IllegalStateException, IOException{
-		//		String rootPath = req.getRealPath("/");
+//				String rootPath = req.getRealPath("/");
 		String rootPath = "G:\\apache-tomcat-7.0.57-windows-x64\\apache-tomcat-7.0.57\\webapps\\file";
 		JSONObject obj=new JSONObject();
 		if(req instanceof MultipartHttpServletRequest){
@@ -236,10 +291,71 @@ public class TemplateController {
         return new ResponseEntity<byte[]>(buffer,headers, HttpStatus.CREATED);
 	}
 	
-//	public void getParams() throws JRException {
-//		File sourceFile = new File("E:/template/dataAndSource.jasper");
-//		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(sourceFile);
+	@RequestMapping(value = "/testTemplet")
+	public void testTemplet(String id,HttpServletRequest request,HttpServletResponse response) throws JRException, IOException {
+		JSONObject data = dataService.getEntityById(id);
+		JSONObject templet = templateService.getEntityById(data.getString("template"));
+		
+		File file = new File("G:\\apache-tomcat-7.0.57-windows-x64\\apache-tomcat-7.0.57\\webapps\\file"+templet.getString("jasperurl"));
+		
+		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(file);
+		
+		JRDataset[] dataSet =  jasperReport.getDatasets();
+		
+		Map<String,Object> parameters = new HashMap<String, Object>();
+		
+		if(data.getString("params").length()>2)parameters = JSON.parseObject(data.getString("params"), Map.class);
+		
+		List<JSONObject> dataSource = datadao.findAllBySQL(jasperReport.getQuery().getText());
+		
+		if(dataSet!=null){
+			for (int i = 0; i < dataSet.length; i++) {
+				List<JSONObject> data1 = datadao.findAllBySQL(dataSet[i].getQuery().getText());
+				parameters.put(dataSet[i].getName(), BaseTools.toJRMapDataSource(null, data1));
+			}
+		}
+//		Map<String,Object> parameter = new HashMap<String, Object>();
+//		parameters.put("people", "Kyle");
+//		parameters.put("department", "Cloud");
+		
+//		JasperOutputUtil.export(file, null, null, Constants.FILE_DOCX);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_HTML);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_JXL);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_ODS);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_ODT);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_PDF);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_PPTX);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_RTF);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_XLS);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_XLSX);
+//		JasperOutputUtil.fill(file, parameters, BaseTools.toJRMapDataSource(null, dataSource), Constants.FILE_XML);
+		
+//		long start = System.currentTimeMillis();
+//		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(file);
+//		JRQuery query = jasperReport.getQuery();
+//		System.err.print(query.getText());
+		
+//		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,BaseTools.toJRMapDataSource(null, dataSource));
+//		jasperPrint.setLeftMargin(50);
+//		jasperPrint.setRightMargin(50);
+//		//JasperExportManager.exportReportToHtmlFile(jasperPrint);
 //		
-//		JRParameter[] param = jasperReport.getParameters();
-//	}
+//		JRXhtmlExporter exporter = new JRXhtmlExporter();
+//		
+////		SimpleHtmlReportConfiguration conf=new SimpleHtmlReportConfiguration();
+////		conf.setSizeUnit(HtmlSizeUnitEnum.POINT);
+////		exporter.setConfiguration(conf);
+//		
+////		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+////		exporter.setExporterOutput(new SimpleHtmlExporterOutput(new File("E:/aa.html")));
+//		
+//		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+//		exporter.setExporterOutput(new SimpleHtmlExporterOutput(new File("E:/aa.html")));
+//		
+//		exporter.exportReport();
+//		
+//		System.err.println("HTML creation time : " + (System.currentTimeMillis() - start));
+		
+//		JasperHelper.export(data.getString("type"), templet.getString("name"), file, request, response, parameters, BaseTools.toJRMapDataSource(null, dataSource));
+	}
 }

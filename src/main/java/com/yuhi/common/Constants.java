@@ -19,4 +19,18 @@ public interface Constants {
 	/** 参数类型表*/
 	public static final int TYPE_PARAM = 0;
 	public static final int TYPE_FIELD = 1;
+	
+	/** 文件类别表*/
+	public static final String FILE_HTML = "html";
+	public static final String FILE_PDF = "pdf";
+	public static final String FILE_XLS = "xls";
+	public static final String FILE_JXL = "jxl";
+	public static final String FILE_DOCX = "docx";
+	public static final String FILE_PPTX = "pptx";
+	public static final String FILE_XLSX = "xlsx";
+	public static final String FILE_RTF = "rtf";
+	public static final String FILE_ODT = "odt";
+	public static final String FILE_ODS = "ods";
+	public static final String FILE_XML = "xml";
+	
 }

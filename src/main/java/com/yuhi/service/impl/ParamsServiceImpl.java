@@ -66,17 +66,19 @@ public class ParamsServiceImpl implements ParamsService{
 			jsonObject.put("create_time", new Date());
 			jsonObject.put("status", Constants.STATUS_ENABLE);
 			
-			for (int i = 0; i < param.length; i++) {
+			for (int i = 20; i < param.length; i++) {
 				jsonObject.put("name", param[i].getName());
 				jsonObject.put("class", param[i].getValueClassName());
 				jsonObject.put("type", Constants.TYPE_PARAM);
 				dao.save(jsonObject);
 			}
-			for (int i = 0; i < field.length; i++) {
-				jsonObject.put("name", field[i].getName());
-				jsonObject.put("class", field[i].getValueClassName());
-				jsonObject.put("type", Constants.TYPE_FIELD);
-				dao.save(jsonObject);
+			if(field!=null||field.length>0){
+				for (int i = 0; i < field.length; i++) {
+					jsonObject.put("name", field[i].getName());
+					jsonObject.put("class", field[i].getValueClassName());
+					jsonObject.put("type", Constants.TYPE_FIELD);
+					dao.save(jsonObject);
+				}
 			}
 		} catch (JRException e) {
 			e.printStackTrace();

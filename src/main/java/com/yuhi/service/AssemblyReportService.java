@@ -11,11 +11,11 @@ import com.alibaba.fastjson.JSONObject;
 
 public interface AssemblyReportService {
 	
-	public void AssemblyByData(ModelMap model,JSONObject data,JSONObject template);
+	public void AssemblyByData(ModelMap model,JSONObject data,JSONObject template,HttpServletResponse response);
 	
-	public void AssemblyBySource(ModelMap model,JSONObject data,JSONObject template) throws JRException;
+	public void AssemblyBySource(ModelMap model,JSONObject data,JSONObject template,HttpServletResponse response);
 	
-	public void AssemblyByDataAndSource(ModelMap model,JSONObject data,JSONObject template) throws JRException;
+	public void AssemblyByDataAndSource(ModelMap model,JSONObject data,JSONObject template,HttpServletResponse response);
 	
 	public void DownloadByData(JSONObject data,JSONObject template,HttpServletRequest request,HttpServletResponse response);
 	
