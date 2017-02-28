@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="modules/base/contentTemplate::cssres">
+<meta charset="UTF-8" />
+</head>
+<style type="text/css">
+.layui-form input[type=checkbox] {
+	display: inline-block;
+	margin: 0 auto;
+}
+</style>
+<body>
+	<div style="margin: 15px;">
+	<form class="layui-form" id="systemres" action="">
+	<div class="layui-tab  layui-tab-brief"  lay-filter="fromtab">
+		<ul class="layui-tab-title">
+			<li class="layui-this">测试调用</li>
+			<li>模板参数</li>
+			<li>数据源参数</li>
+		</ul>
+		<div class="layui-tab-content">
+		  	<!-- tab1 -->
+		    <div class="layui-tab-item layui-show">
+		    	<div class="layui-form-item">
+					<label class="layui-form-label">数据集名称</label>
+					<div class="layui-input-block">
+						<input id="template" type="text" name="template" autocomplete="off" class="layui-input" th:value="${Templet[id]}"/>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">报表类型</label>
+					<div class="layui-input-block">
+				      <select name="type">
+				        <option>pdf</option>
+						<option>html</option>
+						<option>excel</option>
+				      </select>
+				    </div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">数据集名称</label>
+					<div class="layui-input-block">
+						<input type="text" name="dataset" autocomplete="off" class="layui-input"/>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">参数</label>
+					<div class="layui-input-block">
+						<input type="text" name="params" autocomplete="off" class="layui-input"/>
+					</div>
+				</div>
+			</div>
+			<!-- end tab1 -->
+			<!-- tab2 -->
+		    <div id="tab2" class="layui-tab-item">
+			</div>
+			<!-- end tab2 -->
+			<!-- tab3 -->
+		    <div id="tab3" class="layui-tab-item">
+			</div>
+			<!-- end tab3 -->
+		</div>
+	</div>
+	</form>
+	</div>
+	<script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/plugins/jquery-1.4.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/builds/js/lang/grid.zh-CN.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resource/plugins/jquery.bsgrid/builds/merged/bsgrid.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resource/plugins/layui/layui.js}"></script>
+	<script type="text/javascript" th:src="@{/pages/modules/templet/comp/templet-invocation.js}"></script>
+</body>
+
+</html>
