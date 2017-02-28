@@ -77,10 +77,13 @@ import com.yuhi.service.DataService;
 import com.yuhi.service.ParamsService;
 import com.yuhi.service.TemplateService;
 import com.yuhi.service.VersionService;
-import com.yuhi.util.HtmlComponentApp;
 import com.yuhi.util.JasperHelper;
 import com.yuhi.util.JasperOutputUtil;
-
+/**
+ * 后台：http://localhost:8080/yuhi-report/index.do
+ * 模板参数预设：http://localhost:8080/yuhi-report/default.jsp
+ * 根据模板参数调用报表：http://localhost:8080/yuhi-report/templet/checkTemplet.do?id=8
+ */
 @Controller
 @RequestMapping("/templet")
 public class TemplateController {
@@ -102,7 +105,15 @@ public class TemplateController {
 	
 	@Autowired
 	private DataDao datadao;
-	
+	//saveReportTemplateData
+	/**
+	 * 保存客户调用模板需要的数据
+	 * @param data
+	 * @param request
+	 * @return
+	 * @throws JRException
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping(value = "/saveTemplet")
 	@ResponseBody
     public String saveTemplet(String data,HttpServletRequest request) throws JRException, UnsupportedEncodingException {
@@ -115,7 +126,14 @@ public class TemplateController {
 		String callback = request.getParameter("callback");
 		return callback+"({\"url\":\""+url+"templet/checkTemplet.do?id="+data_id+"\"})";
 	}
-	
+	/**
+	 * checkTemplet
+	 * 根据模板data表数据，装载数据并调用显示页面
+	 * @param model
+	 * @param id
+	 * @param response
+	 * @throws JRException
+	 */
 	@RequestMapping(value = "/checkTemplet")
 	public void checkTemplet(ModelMap model,String id,HttpServletResponse response) throws JRException {
 		JSONObject data = dataService.getEntityById(id);
@@ -190,7 +208,11 @@ public class TemplateController {
 		}
 		return "modules/templet/comp/templet-invocation";
 	}
-	
+	/**
+	 * 新增或修改
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping(value = "/editTemplet")
 	@ResponseBody
 	public int editTemplet(HttpServletRequest req){
@@ -290,7 +312,9 @@ public class TemplateController {
         
         return new ResponseEntity<byte[]>(buffer,headers, HttpStatus.CREATED);
 	}
-	
+	/*
+	 *测试 
+	 */
 	@RequestMapping(value = "/testTemplet")
 	public void testTemplet(String id,HttpServletRequest request,HttpServletResponse response) throws JRException, IOException {
 		JSONObject data = dataService.getEntityById(id);

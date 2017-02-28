@@ -72,7 +72,7 @@ public class ParamsServiceImpl implements ParamsService{
 				jsonObject.put("type", Constants.TYPE_PARAM);
 				dao.save(jsonObject);
 			}
-			if(field!=null||field.length>0){
+			if(field!=null&&field.length>0){
 				for (int i = 0; i < field.length; i++) {
 					jsonObject.put("name", field[i].getName());
 					jsonObject.put("class", field[i].getValueClassName());
