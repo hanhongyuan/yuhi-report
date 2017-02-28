@@ -171,6 +171,43 @@
 			}
 		}
 		
+		function invocation(){
+			var index=gridObj.getSelectedRowIndex();
+			if(index!=-1){
+				var obj= gridObj.getRecord(index);
+				boxindex = parent.layer.open({
+					btn: ['提交','取消'],
+					title: '调用显示',
+					maxmin: true,
+					type: 2,
+					content: 'templet.do?goInvocation&id='+obj.id,
+					area: ['800px', '500px'],
+					yes: function(index,layero){
+						var iframeWin = parent.window[layero.find('iframe')[0]['name']];
+						var data=iframeWin.getfromdata();
+						//表单联动
+			        	$.ajax({
+			        		url:'',
+			        		type:'POST',
+			        		data:data,
+			        		success:function(data){
+			        			if(data){
+			        				parent.layer.msg("新增成功！")
+			        				parent.layer.close(boxindex);
+			        				gridObj.refreshPage();
+			        				gridObj.refreshPage();
+			        			}else{
+			        				parent.layer.msg("系统错误，请稍后重试！")
+			        			}
+			        		}
+			        	});
+					}
+				});
+			}else{
+				parent.layer.alert("请选择一条数据！");
+			}
+		}
+		
 		/**其他**/
 		//元素初始化
 		layui.config({
