@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="客户报修派工单" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="c84f51c8-4150-4bfd-8080-391c5369fdc7">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="113"/>
+	<parameter name="is_on_time" class="java.lang.Integer"/>
+	<parameter name="fuwu_level" class="java.lang.String"/>
+	<parameter name="fuwu_taidu" class="java.lang.String"/>
+	<parameter name="客户姓名" class="java.lang.String"/>
+	<parameter name="物业位置" class="java.lang.String"/>
+	<parameter name="维修地点" class="java.lang.String"/>
+	<parameter name="预约时间" class="java.lang.String"/>
+	<parameter name="客户联系电话" class="java.lang.String"/>
+	<parameter name="维修负责人" class="java.lang.String"/>
+	<parameter name="报修时间" class="java.lang.String"/>
+	<parameter name="服务中心接单人" class="java.lang.String"/>
+	<parameter name="生效日期" class="java.lang.String"/>
+	<parameter name="修改状态" class="java.lang.String"/>
+	<parameter name="编号" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from data_source where param = "sss"]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="table_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="param" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sort" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="create_user" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="create_time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="198" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="118" width="56" height="20" uuid="db45d610-3338-4a43-8c44-3154d1ed0f95"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[客户姓名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="118" width="85" height="20" uuid="525152de-5b01-4c4e-8dbe-a92f9879821a"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[物业位置(房号)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="118" width="19" height="80" uuid="6ce8759e-ce2c-45b5-ab15-92985dbebc88"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[客户姓名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="118" width="197" height="80" uuid="8030265c-d1e3-42e2-a1e1-151f4f520f4c"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="138" width="56" height="20" uuid="6478e075-23fa-4048-82fb-52a09e3bd96d"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[维修地点]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="138" width="85" height="20" uuid="99ca3c6a-8b11-4445-b267-1b96f8d83421"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[预约时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="158" width="85" height="20" uuid="d8dfd6e6-5cbc-47dd-be5b-1afd49d56587"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[维修负责人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="158" width="56" height="20" uuid="937c756c-a5ee-4584-b1c1-bc848a5814c4"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[客户联系电话]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="178" width="85" height="20" uuid="f33535c4-a3c8-47e9-b521-440f3a3cd57c"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[服务中心接单人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="178" width="56" height="20" uuid="c80152be-2d03-4457-902c-d0c47a1ce557"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[报修时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="98" width="56" height="20" uuid="d2000e25-5631-4d6b-a33c-23462f24444d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[填写日期:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="98" width="43" height="20" uuid="93496a0f-79d0-4f10-99f7-c5bd9a230449"/>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="47" width="199" height="35" uuid="88423cfe-c391-42a1-9f31-76cb003f06eb"/>
+				<textElement textAlignment="Center">
+					<font fontName="微软雅黑" size="24" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[客户报修派工单]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="0" width="25" height="15" uuid="98feaf55-ee9a-44df-8ea4-130412400453"/>
+				<textElement>
+					<font fontName="微软雅黑" size="7" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[编号:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="0" width="30" height="15" uuid="ed257ce7-ac01-405e-a3da-bcfbcb1157c4"/>
+				<textElement>
+					<font fontName="微软雅黑" size="7" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[生效期:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="0" width="43" height="15" uuid="b96ae41e-1b9b-4195-a51e-eca0e0d99aef"/>
+				<textElement>
+					<font fontName="微软雅黑" size="7" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[修改状态:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="521" y="0" width="23" height="15" uuid="a3995a4b-58be-4b45-9cd1-28c335ab6cc7"/>
+				<textElement>
+					<font fontName="微软雅黑" size="7" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[页数:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="56" y="118" width="117" height="20" uuid="3c13199a-b62e-44f5-98d9-0ab1e26696e5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{客户姓名}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="258" y="118" width="81" height="20" uuid="f0e5b5d1-cfd0-4022-a597-b2554c25e687"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{物业位置}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="138" width="117" height="20" uuid="2905b60d-cffc-435a-9c47-71201e3bf70f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{维修地点}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="258" y="138" width="81" height="20" uuid="88cbf55c-9979-4c99-a9c5-25005a3c9bfe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{预约时间}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="158" width="117" height="20" uuid="e0905c07-d357-4204-b133-25d484a70a98"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{客户联系电话}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="258" y="158" width="81" height="20" uuid="cc8a0b6f-f4a8-4d95-854e-998cbeb69360"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{维修负责人}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="178" width="117" height="20" uuid="db90a0fa-85b5-4ca5-88f9-812da9e68694"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{报修时间}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="258" y="178" width="81" height="20" uuid="aef1fe15-3ffd-49dd-92dc-bf3065467bbb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{服务中心接单人}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="544" y="0" width="11" height="15" uuid="bf0de534-1ab9-4f9e-811d-01fe568fe69e"/>
+				<textElement>
+					<font fontName="微软雅黑" size="7" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="0" width="35" height="15" uuid="895b10fe-1990-4e4a-ae70-bf8a7709aec2"/>
+				<textElement>
+					<font fontName="微软雅黑" size="7" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{生效日期}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="16" height="15" uuid="b89b2ead-465a-4826-83c6-9059af58357f"/>
+				<textElement>
+					<font fontName="微软雅黑" size="7" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{修改状态}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="0" width="89" height="15" uuid="0acd248e-8682-4202-96ce-e1d5b2f9be79"/>
+				<textElement>
+					<font fontName="微软雅黑" size="7" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{编号}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="56" height="20" uuid="9d11a700-9758-46ae-a43e-f211ed7b9ef1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[报修时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="0" width="35" height="20" uuid="01a7b3be-f057-4593-af81-fa5119d26cf1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[数量]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="0" width="38" height="20" uuid="3a9e7c5c-e04d-4ce5-9181-974911a9f8a0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[规格]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="0" width="99" height="20" uuid="4a936b0f-25ae-4094-b3b0-9ad9d4723899"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[其他费用]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="0" width="79" height="20" uuid="2f45f509-2d63-4caf-9209-38462332cc0d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[项目及材料名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="0" width="98" height="20" uuid="b8f1d3dc-9402-46a4-9a0b-d61aba6b6b92"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[人工费用]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="0" width="50" height="20" uuid="ac67e339-ba70-4ea7-a343-440cfe0d900e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[计价/元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="0" width="50" height="20" uuid="a197348d-6630-44a4-b7c3-15d5790094c8"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[单价/元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="0" width="50" height="20" uuid="7d9b2a9b-f45f-446c-a5f9-38c736733e4a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[单位]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="135" y="0" width="38" height="20" uuid="059928a1-25b6-498d-9be1-6fe84cd18626"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="0" width="79" height="20" uuid="025f99c6-1182-4580-ab3a-234f9c8de0c6"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="358" y="0" width="98" height="20" forecolor="#FFFFFF" backcolor="#FF6633" uuid="c2ab8532-25e8-4fb8-860c-d428d3bdd0c5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{table_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="0" width="99" height="20" uuid="4c00baed-9a49-46be-88e5-ddbd64c388cb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{param}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="173" y="0" width="35" height="20" uuid="e1096008-a02b-405a-85e5-cfde3419f4f5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sort}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="208" y="0" width="50" height="20" uuid="e9e1cc23-da4f-43fc-9081-0ee7970ef517"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="0" width="50" height="20" uuid="1566af9d-a885-4ee7-9937-7a4d8fdecdec"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="0" width="50" height="20" uuid="9f089b7e-09cd-41a6-a05e-bc4fb3165748"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="56" height="20" uuid="f14af397-2570-42d5-8bc6-89012f667165"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="308" y="0" width="50" height="20" uuid="79a684fe-2661-4ad5-b260-1be863812b1e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}.intValue()*$P{is_on_time}.intValue()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="412">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="199" width="555" height="64" backcolor="#CCCCCC" uuid="c2adbb3d-d5ab-4c24-ab88-7b9704570954"/>
+				<textElement>
+					<font fontName="微软雅黑"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="56" height="20" uuid="76da12dc-bd50-4271-996e-9c7f56628c2e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[收费情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="80" width="68" height="20" uuid="c9a59fcf-8e88-4387-9600-996749178d29"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[财务收费确认]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="56" height="80" uuid="728f287b-e4ea-4377-895a-d762523d3769"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[施工接单确认]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="80" width="148" height="20" uuid="3d0e6eff-360d-4115-9c99-792fc9bc1537"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="60" width="56" height="20" uuid="de2d4089-9fe5-4d3f-aa01-97eb2662a69a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[完成时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="60" width="56" height="20" uuid="348b10c0-0a31-4ea3-ac1b-7807a38cf2c5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[接单时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="60" width="216" height="20" uuid="244f7847-5746-42e3-a207-242f0eba98ef"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[年	月	日	时	分]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="120" width="499" height="20" uuid="465c9f68-cfa9-4bae-a9fd-284f09404bc1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5" lineStyle="Dashed"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[客户签名:						日期:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="56" height="40" uuid="d6127395-1404-4e6e-85c2-cb9ef993dfc4"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[客户评价]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="56" height="40" uuid="1953cb6a-ce8a-43ae-9771-031275f81797"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[客户回访]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="160" width="79" height="20" uuid="53513957-5e20-4a9d-afe0-a1d2b44f8b81"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[回访时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="140" width="79" height="20" uuid="76b3fc69-cb74-4515-95af-1c1f54d9793c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[维修情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="140" width="204" height="20" uuid="689d45a4-2603-4547-8d65-54a5b5c9c393"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="140" width="68" height="20" uuid="b2029f22-ffb1-4994-8e03-73df91987abf"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[回访人签名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="140" width="148" height="20" uuid="c4ee90f7-4788-41bd-97ab-3da16ba10117"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="160" width="148" height="20" uuid="4646bfc2-0cd4-4823-b681-34011f209829"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="135" y="160" width="204" height="20" uuid="7f66c1ad-b475-4ca7-bafe-7ca61e42c11f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="160" width="68" height="20" uuid="c66ea0a7-4fa4-4d2c-8290-e86aa42a8e97"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[顾客确认]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="80" width="283" height="20" uuid="e4e757d7-90bc-495e-9da0-11f17dc907fd"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[无偿服务			有偿服务]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="199" width="555" height="18" forecolor="#000000" backcolor="#CCCCCC" uuid="23f16135-3e9d-474a-bf5f-23d243e4d3de"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[  注:1.如遇急修工程人员需在接听客服人员电话后15分钟内赶往现场;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="217" width="555" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="50b935d4-6d82-48db-a589-e37269a21b8b"/>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[       2.如遇急修工程人员需在接听客服人员电话后15分钟内赶往现场;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="232" width="555" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="f3a54dd9-a443-4fe7-817c-e5b06fbd9d63"/>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[       3.如遇急修工程人员需在接听客服人员电话后15分钟内赶往现场;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="247" width="555" height="16" forecolor="#000000" backcolor="#CCCCCC" uuid="d2c840e5-1daa-43d2-ae7c-17547793fd88"/>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[       4.如遇急修工程人员需在接听客服人员电话后15分钟内赶往现场;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="0" width="499" height="60" uuid="89c29cc9-e6d9-46de-82ca-7c5805097226"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[项目负责人签名:			年	月	日]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="60" width="171" height="20" uuid="39c93f7f-bda7-4d12-9eb5-83b1a7e4b1c3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[年	月	日	时	分]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="56" y="100" width="499" height="20" uuid="1b2a34e7-2713-4134-9119-73a66c25d652"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{is_on_time}.equals("1")?"是否及时:是■, 否□ ;   ":"是否及时:是□, 否■ ;   ")+($P{fuwu_level}.equals("4")?"服务质量: 优■, 良□, 中□, 差□ ;   ":$P{fuwu_level}.equals("3")?"服务质量: 优□, 良■, 中□, 差□   ; ":$P{fuwu_level}.equals("2")?"服务质量: 优□, 良□, 中■, 差□ ;   ":"服务质量: 优□, 良□, 中□, 差■ ;   ")+($P{fuwu_taidu}.equals("4")?"服务态度: 优■, 良□, 中□, 差□ ;   ":$P{fuwu_taidu}.equals("3")?"服务态度: 优□, 良■, 中□, 差□ ;   ":$P{fuwu_taidu}.equals("2")?"服务态度: 优□, 良□, 中■, 差□ ;   ":"服务态度: 优□, 良□, 中□, 差■ ;   ")]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

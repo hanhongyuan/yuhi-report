@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="物业通知通告" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0a585659-8f09-4248-8e56-bf4794c31c7e">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="start_year" class="java.lang.String"/>
+	<parameter name="start_month" class="java.lang.String"/>
+	<parameter name="start_day" class="java.lang.String"/>
+	<parameter name="start_time" class="java.lang.String"/>
+	<parameter name="end_year" class="java.lang.String"/>
+	<parameter name="end_month" class="java.lang.String"/>
+	<parameter name="end_day" class="java.lang.String"/>
+	<parameter name="end_time" class="java.lang.String"/>
+	<parameter name="person_incharge" class="java.lang.String"/>
+	<parameter name="contact_phone" class="java.lang.String"/>
+	<parameter name="zone" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="434" splitType="Stretch">
+			<staticText>
+				<reportElement x="175" y="22" width="204" height="42" uuid="0c002cf5-a931-4d03-aaec-a5abf454108d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="30" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[停电通知]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="82" width="113" height="20" uuid="0a1a21a4-3228-4b9e-95c0-10069e4ad128"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="14" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[尊敬的全体住户:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="102" width="380" height="28" uuid="bd3393fc-59e5-491f-836c-d056ae66ad4f"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[接供电局通知,因供电检修线路需要,兹定于]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="214" width="113" height="20" uuid="152b6a5b-50f9-470b-8580-e73bce7a5b32"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[不便之处敬请原谅.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="234" width="192" height="20" uuid="fbb90d67-e43f-4b81-854b-cdc0d5f570d0"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[如有疑问,欢迎致电垂询,联系电话:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="286" width="81" height="20" uuid="6d4ba555-b8ab-42c8-8a38-068eb051eb3c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[本通知张贴至]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="306" width="100" height="20" uuid="c6153d93-791e-45c9-b3db-d2cd949cd4f4"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[负责人:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="421" y="102" width="63" height="28" uuid="a97cec24-6f39-4022-9f71-b48d5b38d620"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{start_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="102" width="29" height="28" uuid="a7532806-3318-429c-8949-c7d15963aedd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{start_month}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="130" width="27" height="28" uuid="0d87384c-37b3-4279-b703-fd91f969a4e7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{start_day}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="301" y="130" width="254" height="28" uuid="8c54519d-7f13-4ab4-b564-72d9feadb211"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[区域将暂时停电.敬请各住户]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="158" width="555" height="28" uuid="ab4cb2fd-6fc1-4b7b-b88c-717c80dfe5ee"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[做好停电的准备工作(有重要电脑及通讯设备的住户要将设备关]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="48" y="130" width="27" height="28" uuid="60a42fb7-38fe-4727-857f-45c46208f259"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{start_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="130" width="27" height="28" uuid="ec2db075-5960-492b-96b4-a4620771a5a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{end_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="130" width="136" height="28" uuid="6952a234-f0f6-4fef-a4bf-354d9a2added"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{zone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="447" y="286" width="28" height="20" uuid="aaaccc64-dcc2-42b9-b3f8-8bdab1d6d835"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{end_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="286" width="16" height="20" uuid="5decd6ba-5ea4-4506-9edd-6b6b099eeb41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{end_month}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="514" y="286" width="16" height="20" uuid="00abf631-d5f4-499c-970f-fdcb09a68b65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{end_day}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="494" y="306" width="61" height="20" uuid="80092887-d789-42d7-86eb-065236151cb7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{person_incharge}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="234" width="130" height="20" uuid="85c08fe2-9044-4978-945d-0ad47891225c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{contact_phone}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="186" width="555" height="28" uuid="11b2e925-c159-4ebe-af03-56e076ed7dcd"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[闭)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="102" width="21" height="28" uuid="625e16d2-694c-48e5-9622-fae60f246ac8"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[年]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="102" width="21" height="28" uuid="69bd712c-78fd-4419-9204-f7972ebe63b2"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[月]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="130" width="21" height="28" uuid="f713d927-019a-40fe-b48d-60fb2e3c43dd"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[日]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="130" width="42" height="28" uuid="1876bb61-d001-49fe-901d-2b719a94c3af"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[时至]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="130" width="21" height="28" uuid="b9aba0aa-e9a5-4f5a-8859-3cfb57c9471f"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="20" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[时]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="286" width="12" height="20" uuid="9037a43b-466e-4a22-8cb2-439e19c904ff"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[年]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="502" y="286" width="12" height="20" uuid="1c20a97e-0fca-4802-9f32-06ac2e9e5555"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[月]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="530" y="286" width="25" height="20" uuid="6889f85f-2080-481c-89e4-075394bfbf17"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[日止]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>
